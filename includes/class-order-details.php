@@ -5,11 +5,33 @@
 class AffiliateWP_Order_Details_For_Affiliates_Order_Details {
 
 	/**
+	 * Allowed order details
+	 * 
+	 * @since 1.0
+	 * @return  array allowed order details
+	 */
+	public function allowed() {
+
+		$allowed = array(
+			'customer_name'             => true,
+			'customer_email'            => true,
+			'customer_billing_address'  => true,
+			'customer_shipping_address' => true,
+			'customer_phone'            => true,
+			'order_number'              => true,
+			'order_total'               => true,
+			'order_date'                => true,
+			'referral_amount'           => true
+		);
+
+		return (array) apply_filters( 'affwp_odfa_allowed_details', $allowed );
+	}
+
+	/**
 	 * Retrieve specific order information
 	 */
 	public function get( $referral = '', $info = '' ) {
-		$affwp_odfa = affiliatewp_order_details_for_affiliates();
-		$is_allowed = $affwp_odfa->allowed_order_details();
+		$is_allowed = $this->allowed();
 
 		switch ( $referral->context ) {
 
