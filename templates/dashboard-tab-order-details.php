@@ -1,6 +1,6 @@
 <?php
 	$affwp_odfa = affiliatewp_order_details_for_affiliates();
-	$is_allowed = $affwp_odfa->allowed_order_details();
+	$is_allowed = $affwp_odfa->order_details->allowed();
 	$referrals  = apply_filters( 'affwp_odfa_referral_args', affiliate_wp()->referrals->get_referrals( 
 		array( 
 			'affiliate_id' => affwp_get_affiliate_id(), 

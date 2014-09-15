@@ -48,6 +48,7 @@ final class AffiliateWP_Order_Details_For_Affiliates {
 	 * Class Properties
 	 */
 	public $order_details;
+	public $emails;
 
 	/**
 	 * Main AffiliateWP_Order_Details_For_Affiliates Instance
@@ -73,6 +74,7 @@ final class AffiliateWP_Order_Details_For_Affiliates {
 			self::$instance->hooks();
 
 			self::$instance->order_details = new AffiliateWP_Order_Details_For_Affiliates_Order_Details;
+			self::$instance->emails        = new AffiliateWP_Order_Details_For_Affiliates_Emails;
 		}
 
 		return self::$instance;
@@ -147,6 +149,11 @@ final class AffiliateWP_Order_Details_For_Affiliates {
 	 */
 	private function includes() {
 		require_once self::$plugin_dir . 'includes/class-order-details.php';
+		require_once self::$plugin_dir . 'includes/class-emails.php';
+
+		if ( is_admin() ) {
+			require_once self::$plugin_dir . 'includes/class-admin.php';
+		}
 	}
 
 	/**
@@ -159,15 +166,6 @@ final class AffiliateWP_Order_Details_For_Affiliates {
 	private function hooks() {
 		// add customers tab
 		add_action( 'affwp_affiliate_dashboard_tabs', array( $this, 'add_order_details_tab' ), 10, 2 );
-		
-		// update the affiliate
-		add_action( 'affwp_update_affiliate', array( $this, 'update_affiliate' ), 0 );
-
-		// add checkbox to edit affiliate screen
-		add_action( 'affwp_edit_affiliate_bottom', array( $this, 'admin_field' ) );
-
-		// send the emails when the referral is complete
-		add_action( 'affwp_complete_referral',  array( $this, 'complete_referral' ), 10, 3 );
 
 		// prevent access to the customers tab
 		add_action( 'template_redirect', array( $this, 'no_access' ) );
@@ -190,7 +188,7 @@ final class AffiliateWP_Order_Details_For_Affiliates {
 	 * @return void
 	 */
 	public function no_access() {
-		if ( $this->is_order_details_tab() && ! $this->can_receive_purchase_details( affwp_get_affiliate_user_id( affwp_get_affiliate_id() ) ) ) {
+		if ( $this->is_order_details_tab() && ! $this->can_access_order_details( affwp_get_affiliate_user_id( affwp_get_affiliate_id() ) ) ) {
 			wp_redirect( affiliate_wp()->login->get_login_url() ); exit;
 		}
 	}
@@ -227,7 +225,7 @@ final class AffiliateWP_Order_Details_For_Affiliates {
 	 * @return void
 	 */
 	public function add_order_details_tab( $affiliate_id, $active_tab ) {
-		if ( ! $this->can_receive_purchase_details( affwp_get_affiliate_user_id( $affiliate_id ) ) ) {
+		if ( ! $this->can_access_order_details( affwp_get_affiliate_user_id( $affiliate_id ) ) ) {
 			return;
 		}
 
@@ -252,144 +250,13 @@ final class AffiliateWP_Order_Details_For_Affiliates {
 	}
 
 	/**
-	 * When the referral is complete, send email to the affiliate with the customer details
-	 *
-	 * @since 1.0
-	 *
-	 * @return void
-	 */
-	public function complete_referral( $referral_id, $referral, $reference ) {
-		// get referral details
-		$referral     = affwp_get_referral( $referral_id );
-		$affiliate_id = $referral->affiliate_id;
-		$email        = affwp_get_affiliate_email( $affiliate_id );
-
-		// get enabled integrations
-		$enabled_integrations = affiliate_wp()->integrations->get_enabled_integrations();
-
-		// build array to hold the details
-		$details = array();
-
-		// Easy Digital Downloads
-		if ( array_key_exists( 'edd', $enabled_integrations ) && 'edd' == $referral->context ) {
-			$user_info = edd_get_payment_meta_user_info( $reference );
-			
-			$details['customer_name']  = $user_info['first_name'];
-			$details['customer_email'] = $user_info['email'];
-		}
-
-		// WooCommerce
-		if ( array_key_exists( 'woocommerce', $enabled_integrations ) && 'woocommerce' == $referral->context ) {
-			$order = new WC_Order( $reference );
-
-			//if ( ! $order->get_formatted_billing_address() ) _e( 'N/A', 'woocommerce' ); else echo $order->get_formatted_billing_address();
-			
-			$details['customer_name']    = $order->billing_first_name;
-			$details['customer_email']   = $order->billing_email;
-			$details['customer_phone']   = $order->billing_phone;
-			$details['customer_address'] = $order->get_formatted_billing_address();
-
-		}
-		
-		$subject = apply_filters( 'affwp_odfa_email_subject', __( 'The customer\'s details for your most recent referral', 'affiliatewp-order-details-for-affiliates' ) );
-		
-		// get our message
-		$message = $this->get_email_message( $reference, $affiliate_id, $details );
-
-		// only send email to affiliates that are allowed to receive purchase details
-		if ( $this->can_receive_purchase_details( affwp_get_affiliate_user_id( $affiliate_id ) ) ) {
-			add_filter( 'wp_mail_content_type',  array( $this, 'set_html_content_type' ) );
-			affiliate_wp()->emails->send( $email, $subject, $message );
-			remove_filter( 'wp_mail_content_type', array( $this, 'set_html_content_type' ) );
-		}
-		
-	}
-	
-	/**
-	 * The email message that is sent to the affiliate
-	 *
-	 * @since 1.0
-	 *
-	 * @return void
-	 */
-	public function get_email_message( $reference = 0, $affiliate_id = 0, $details = array() ) {
-		$affiliate_name   = affiliate_wp()->affiliates->get_affiliate_name( $affiliate_id );
-		
-		$customer_name    = isset( $details['customer_name'] ) ? $details['customer_name'] : '';
-		$customer_email   = isset( $details['customer_email'] ) ? $details['customer_email'] : '';
-		$customer_phone   = isset( $details['customer_phone'] ) ? $details['customer_phone'] : '';
-		$customer_address = isset( $details['customer_address'] ) ? $details['customer_address'] : '';
-
-		ob_start();
-		?>
-
-		<p><?php _e( 'Hi', 'affiliatewp-order-details-for-affiliates' ); ?> <?php echo $affiliate_name; ?>,</p>
-		<p><?php _e( 'Here are the customer\'s details for your most recent referral:', 'affiliatewp-order-details-for-affiliates' ); ?></p>
-
-		<?php if ( $customer_name ) : ?>
-			<p><?php _e( 'Name:', 'affiliatewp-order-details-for-affiliates' ); ?> <?php echo $customer_name; ?></p>
-		<?php endif; ?>
-
-		<?php if ( $customer_email ) : ?>
-			<p><?php _e( 'Email Address:', 'affiliatewp-order-details-for-affiliates' ); ?> <?php echo $customer_email; ?></p>
-		<?php endif; ?>
-
-		<?php if ( $customer_phone ) : ?>
-			<p><?php _e( 'Phone:', 'affiliatewp-order-details-for-affiliates' ); ?> <?php echo $customer_phone; ?></p>
-		<?php endif; ?>
-
-		<?php if ( $customer_address ) : ?>
-			<p><?php _e( 'Address:', 'affiliatewp-order-details-for-affiliates' ); ?> <?php echo $customer_address; ?></p>
-		<?php endif; ?>
-
-	<?php
-		return ob_get_clean();
-	}
-
-
-	/**
-	 * Allowed order details
-	 * 
-	 * @since 1.0
-	 * @return  array allowed order details
-	 */
-	public function allowed_order_details() {
-
-		$allowed = array(
-			'customer_name'             => true,
-			'customer_email'            => true,
-			'customer_billing_address'  => true,
-			'customer_shipping_address' => true,
-			'customer_phone'            => true,
-			'order_number'              => true,
-			'order_total'               => true,
-			'order_date'                => true,
-			'referral_amount'           => true
-		);
-
-		return (array) apply_filters( 'affwp_odfa_allowed_details', $allowed );
-	}
-
-
-	/**
-	 *  Set the content type to text/html
-	 *
-	 * @since 1.0
-	 *
-	 * @return void
-	 */
-	public function set_html_content_type() {
-	    return 'text/html';
-	}
-
-	/**
-	 * Can the affiliate see the purchase details?
+	 * Can the affiliate access the purchase details?
 	 *
 	 * @since 1.0
 	 *
 	 * @return boolean
 	 */
-	public function can_receive_purchase_details( $affiliate_id ) {
+	public function can_access_order_details( $affiliate_id ) {
 		$can_receive = get_user_meta( $affiliate_id, 'affwp_order_details_access', true );
 
 		if ( $can_receive ) {
@@ -399,64 +266,6 @@ final class AffiliateWP_Order_Details_For_Affiliates {
 		return (bool) false;
 	}
 
-
-	/**
-	 * Add checkbox to edit affiliate page
-	 *
-	 * @since 1.0
-	 *
-	 * @return boolean
-	 */
-	public function admin_field( $affiliate ) {
-		$checked = get_user_meta( $affiliate->user_id, 'affwp_order_details_access', true );
-	?>
-		<table class="form-table">
-
-			<tr class="form-row form-required">
-
-				<th scope="row">
-					<label for="order-details-access"><?php _e( 'View Order Details', 'affiliatewp-order-details-for-affiliates' ); ?></label>
-				</th>
-
-				<td>
-					<input type="checkbox" name="order_details_access" id="order-details-access" value="1" <?php checked( $checked, 1 ); ?> />
-					<p class="description"><?php _e( 'Allow affiliate to see the order details for each referral on their affiliate dashboard.', 'affiliatewp-order-details-for-affiliates' ); ?></p>
-				</td>
-
-			</tr>
-
-		</table>
-
-	<?php		
-	}
-	
-	/**
-	 * Save share details option in user meta table
-	 *
-	 * @since 1.0
-	 *
-	 * @return boolean
-	 */
-	public function update_affiliate( $data ) {
-
-		if ( empty( $data['affiliate_id'] ) ) {
-			return false;
-		}
-
-		if ( ! current_user_can( 'manage_affiliates' ) ) {
-			return;
-		}
-
-		$share_purchase_details = isset( $data['order_details_access'] ) ? $data['order_details_access'] : '';
-
-		if ( $share_purchase_details ) {
-			update_user_meta( affwp_get_affiliate_user_id( $data['affiliate_id'] ), 'affwp_order_details_access', $share_purchase_details );
-		} else {
-			delete_user_meta( affwp_get_affiliate_user_id( $data['affiliate_id'] ), 'affwp_order_details_access' );
-		}
-		
-	}
-	
 
 	/**
 	 * Modify plugin metalinks
