@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: AffiliateWP - Order Details For Affiliates\n"
-"POT-Creation-Date: 2014-09-15 18:15+1200\n"
-"PO-Revision-Date: 2014-09-15 18:15+1200\n"
+"POT-Creation-Date: 2014-09-15 22:41+1200\n"
+"PO-Revision-Date: 2014-09-15 22:41+1200\n"
 "Last-Translator: Andrew Munro, Sumobi <andrew@sumobi.com>\n"
 "Language-Team: AffiliateWP <support@affiliatewp.com>\n"
 "Language: en_US\n"
@@ -16,61 +16,22 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-SearchPath-0: ..\n"
 
-#: ../affiliatewp-order-details-for-affiliates.php:84
-#: ../affiliatewp-order-details-for-affiliates.php:96
+#: ../affiliatewp-order-details-for-affiliates.php:95
+#: ../affiliatewp-order-details-for-affiliates.php:107
 msgid "Cheatin&#8217; huh?"
 msgstr ""
 
-#: ../affiliatewp-order-details-for-affiliates.php:225
-msgid "Customers"
+#: ../affiliatewp-order-details-for-affiliates.php:234
+#: ../templates/dashboard-tab-order-details.php:14
+#: ../templates/dashboard-tab-order-details.php:19
+msgid "Order Details"
 msgstr ""
 
-#: ../affiliatewp-order-details-for-affiliates.php:283
-msgid "The customer's details for your most recent referral"
-msgstr ""
-
-#: ../affiliatewp-order-details-for-affiliates.php:315
-msgid "Hi"
-msgstr ""
-
-#: ../affiliatewp-order-details-for-affiliates.php:316
-msgid "Here are the customer's details for your most recent referral:"
-msgstr ""
-
-#: ../affiliatewp-order-details-for-affiliates.php:319
-#: ../templates/dashboard-tab-customers.php:95
-msgid "Name:"
-msgstr ""
-
-#: ../affiliatewp-order-details-for-affiliates.php:323
-msgid "Email Address:"
-msgstr ""
-
-#: ../affiliatewp-order-details-for-affiliates.php:327
-#: ../templates/dashboard-tab-customers.php:103
-msgid "Phone:"
-msgstr ""
-
-#: ../affiliatewp-order-details-for-affiliates.php:331
-#: ../templates/dashboard-tab-customers.php:108
-msgid "Address:"
-msgstr ""
-
-#: ../affiliatewp-order-details-for-affiliates.php:381
-msgid "Order Detail Access"
-msgstr ""
-
-#: ../affiliatewp-order-details-for-affiliates.php:386
-msgid ""
-"Allow this affiliate to see order details for each referral on their "
-"affiliate dashboard."
-msgstr ""
-
-#: ../affiliatewp-order-details-for-affiliates.php:436
+#: ../affiliatewp-order-details-for-affiliates.php:282
 msgid "Get more add-ons for AffiliateWP"
 msgstr ""
 
-#: ../affiliatewp-order-details-for-affiliates.php:436
+#: ../affiliatewp-order-details-for-affiliates.php:282
 msgid "Get add-ons"
 msgstr ""
 
@@ -88,27 +49,88 @@ msgstr ""
 msgid " requires %sAffiliateWP%s. Please install it to continue."
 msgstr ""
 
-#: ../templates/dashboard-tab-customers.php:13
-#: ../templates/dashboard-tab-customers.php:19
-msgid "Customer Details"
+#: ../includes/class-admin.php:55
+msgid "View Order Details"
 msgstr ""
 
-#: ../templates/dashboard-tab-customers.php:18
-msgid "Order Details"
+#: ../includes/class-admin.php:60
+msgid ""
+"Allow affiliate to see the order details for each referral on their "
+"affiliate dashboard."
 msgstr ""
 
-#: ../templates/dashboard-tab-customers.php:77
-msgid "Date:"
+#: ../includes/class-emails.php:45
+msgid "The order details for your most recent referral"
 msgstr ""
 
-#: ../templates/dashboard-tab-customers.php:82
+#: ../includes/class-emails.php:94
+msgid "Hi"
+msgstr ""
+
+#: ../includes/class-emails.php:95
+msgid "Here are the order details for your most recent referral:"
+msgstr ""
+
+#: ../includes/class-emails.php:100
+#: ../templates/dashboard-tab-order-details.php:47
+msgid "Order Number:"
+msgstr ""
+
+#: ../includes/class-emails.php:107
+#: ../templates/dashboard-tab-order-details.php:54
+msgid "Order Date:"
+msgstr ""
+
+#: ../includes/class-emails.php:114
+#: ../templates/dashboard-tab-order-details.php:61
 msgid "Order Total:"
 msgstr ""
 
-#: ../templates/dashboard-tab-customers.php:87
-msgid "Your Commission:"
+#: ../includes/class-emails.php:121
+#: ../templates/dashboard-tab-order-details.php:68
+msgid "Referral Amount:"
 msgstr ""
 
-#: ../templates/dashboard-tab-customers.php:99
+#: ../includes/class-emails.php:127
+msgid "Customer Name:"
+msgstr ""
+
+#: ../includes/class-emails.php:132
+msgid "Customer Email:"
+msgstr ""
+
+#: ../includes/class-emails.php:138
+msgid "Customer Phone:"
+msgstr ""
+
+#: ../includes/class-emails.php:143
+msgid "Customer Shipping Address:"
+msgstr ""
+
+#: ../includes/class-emails.php:147
+msgid "Customer Billing Address:"
+msgstr ""
+
+#: ../templates/dashboard-tab-order-details.php:20
+msgid "Customer Information"
+msgstr ""
+
+#: ../templates/dashboard-tab-order-details.php:82
+msgid "Name:"
+msgstr ""
+
+#: ../templates/dashboard-tab-order-details.php:86
 msgid "Email:"
+msgstr ""
+
+#: ../templates/dashboard-tab-order-details.php:90
+msgid "Phone:"
+msgstr ""
+
+#: ../templates/dashboard-tab-order-details.php:95
+msgid "Shipping Address:"
+msgstr ""
+
+#: ../templates/dashboard-tab-order-details.php:99
+msgid "Billing Address:"
 msgstr ""
