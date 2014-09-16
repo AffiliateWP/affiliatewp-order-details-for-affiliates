@@ -188,7 +188,7 @@ final class AffiliateWP_Order_Details_For_Affiliates {
 	 * @return void
 	 */
 	public function no_access() {
-		if ( $this->is_order_details_tab() && ! $this->can_access_order_details( affwp_get_affiliate_user_id( affwp_get_affiliate_id() ) ) ) {
+		if ( $this->is_order_details_tab() && ! ( $this->can_access_order_details( affwp_get_affiliate_user_id( affwp_get_affiliate_id() ) ) || $this->global_order_details_access() ) ) {
 			wp_redirect( affiliate_wp()->login->get_login_url() ); exit;
 		}
 	}
@@ -225,7 +225,7 @@ final class AffiliateWP_Order_Details_For_Affiliates {
 	 * @return void
 	 */
 	public function add_order_details_tab( $affiliate_id, $active_tab ) {
-		if ( ! $this->can_access_order_details( affwp_get_affiliate_user_id( $affiliate_id ) ) ) {
+		if ( ! ( $this->can_access_order_details( affwp_get_affiliate_user_id( $affiliate_id ) ) || $this->global_order_details_access() ) ) {
 			return;
 		}
 
@@ -266,6 +266,22 @@ final class AffiliateWP_Order_Details_For_Affiliates {
 		return (bool) false;
 	}
 
+	/**
+	 * Global access for the order details
+	 *
+	 * @since 1.0
+	 *
+	 * @return boolean
+	 */
+	public function global_order_details_access() {
+		$global_access = affiliate_wp()->settings->get( 'order_details_access' );
+
+		if ( $global_access ) {
+			return (bool) true;
+		}
+
+		return (bool) false;
+	}
 
 	/**
 	 * Modify plugin metalinks
