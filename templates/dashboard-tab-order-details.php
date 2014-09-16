@@ -1,10 +1,11 @@
 <?php
 	$affwp_odfa = affiliatewp_order_details_for_affiliates();
+
 	$is_allowed = $affwp_odfa->order_details->allowed();
 	$referrals  = apply_filters( 'affwp_odfa_referral_args', affiliate_wp()->referrals->get_referrals( 
 		array( 
-			'affiliate_id' => affwp_get_affiliate_id(), 
-			'number'       => -1,
+			'affiliate_id' => affwp_get_affiliate_id(), // only get order details from the logged-in affiliate
+			'number'       => -1,						// show all
 		) 
 	), affwp_get_affiliate_id() );
 ?>
@@ -13,6 +14,7 @@
 
 	<h4><?php _e( 'Order Details', 'affiliatewp-order-details-for-affiliates' ); ?></h4>
 
+	<?php if ( $referrals ) : ?>
 	<table class="affwp-table">
 		<thead>
 			<tr>
@@ -76,20 +78,18 @@
 					<td>
 						<?php do_action( 'affwp_odfa_customer_details_start', $referral ); ?>
 
-						<p>
-
 						<?php if ( $is_allowed['customer_name'] && isset( $customer_name ) ) : ?>
-							<strong><?php _e( 'Name:', 'affiliatewp-order-details-for-affiliates' ); ?></strong> <?php echo $customer_name; ?><br />
+							<p><strong><?php _e( 'Name:', 'affiliatewp-order-details-for-affiliates' ); ?></strong><br /><?php echo $customer_name; ?></p>
 						<?php endif; ?>
 
 						<?php if ( $is_allowed['customer_email'] && isset( $customer_email ) ) : ?>
-							<strong><?php _e( 'Email:', 'affiliatewp-order-details-for-affiliates' ); ?></strong> <?php echo $customer_email; ?><br />
+							<p><strong><?php _e( 'Email:', 'affiliatewp-order-details-for-affiliates' ); ?></strong><br /><?php echo $customer_email; ?></p>
 						<?php endif; ?>
 
 						<?php if ( $is_allowed['customer_phone'] && isset( $customer_phone ) ) : ?>
-							<strong><?php _e( 'Phone:', 'affiliatewp-order-details-for-affiliates' ); ?></strong> <?php echo $customer_phone; ?>
+							<p><strong><?php _e( 'Phone:', 'affiliatewp-order-details-for-affiliates' ); ?></strong><br /><?php echo $customer_phone; ?></p>
 						<?php endif; ?>
-						</p>
+						
 
 						<?php if ( $is_allowed['customer_shipping_address'] && isset( $customer_shipping_address ) ) : ?>
 							<p><strong><?php _e( 'Shipping Address:', 'affiliatewp-order-details-for-affiliates' ); ?></strong><br/> <?php echo $customer_shipping_address; ?></p>
@@ -107,4 +107,8 @@
 		} ?>
 		</tbody>
 	</table>
+
+	<?php else : ?>
+		<p><?php _e( 'There are currently no order details to display.', 'affiliatewp-order-details-for-affiliates' ); ?></p>
+	<?php endif; ?>
 </div>	
