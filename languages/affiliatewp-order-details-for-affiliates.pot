@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: AffiliateWP - Order Details For Affiliates\n"
-"POT-Creation-Date: 2014-09-15 22:41+1200\n"
-"PO-Revision-Date: 2014-09-15 22:41+1200\n"
+"POT-Creation-Date: 2014-09-16 16:55+1200\n"
+"PO-Revision-Date: 2014-09-16 16:55+1200\n"
 "Last-Translator: Andrew Munro, Sumobi <andrew@sumobi.com>\n"
 "Language-Team: AffiliateWP <support@affiliatewp.com>\n"
 "Language: en_US\n"
@@ -22,16 +22,16 @@ msgid "Cheatin&#8217; huh?"
 msgstr ""
 
 #: ../affiliatewp-order-details-for-affiliates.php:234
-#: ../templates/dashboard-tab-order-details.php:14
-#: ../templates/dashboard-tab-order-details.php:19
+#: ../templates/dashboard-tab-order-details.php:15
+#: ../templates/dashboard-tab-order-details.php:21
 msgid "Order Details"
 msgstr ""
 
-#: ../affiliatewp-order-details-for-affiliates.php:282
+#: ../affiliatewp-order-details-for-affiliates.php:298
 msgid "Get more add-ons for AffiliateWP"
 msgstr ""
 
-#: ../affiliatewp-order-details-for-affiliates.php:282
+#: ../affiliatewp-order-details-for-affiliates.php:298
 msgid "Get add-ons"
 msgstr ""
 
@@ -49,14 +49,24 @@ msgstr ""
 msgid " requires %sAffiliateWP%s. Please install it to continue."
 msgstr ""
 
-#: ../includes/class-admin.php:55
-msgid "View Order Details"
+#: ../includes/class-admin.php:63
+msgid "Order Details Access"
 msgstr ""
 
-#: ../includes/class-admin.php:60
+#: ../includes/class-admin.php:67
 msgid ""
 "Allow affiliate to see the order details for each referral on their "
 "affiliate dashboard."
+msgstr ""
+
+#: ../includes/class-admin.php:85
+msgid "Allow Global Access To Order Details"
+msgstr ""
+
+#: ../includes/class-admin.php:86
+msgid ""
+"Check this box if you would like all affiliates to have access to order "
+"details."
 msgstr ""
 
 #: ../includes/class-emails.php:45
@@ -72,22 +82,22 @@ msgid "Here are the order details for your most recent referral:"
 msgstr ""
 
 #: ../includes/class-emails.php:100
-#: ../templates/dashboard-tab-order-details.php:47
+#: ../templates/dashboard-tab-order-details.php:49
 msgid "Order Number:"
 msgstr ""
 
 #: ../includes/class-emails.php:107
-#: ../templates/dashboard-tab-order-details.php:54
+#: ../templates/dashboard-tab-order-details.php:56
 msgid "Order Date:"
 msgstr ""
 
 #: ../includes/class-emails.php:114
-#: ../templates/dashboard-tab-order-details.php:61
+#: ../templates/dashboard-tab-order-details.php:63
 msgid "Order Total:"
 msgstr ""
 
 #: ../includes/class-emails.php:121
-#: ../templates/dashboard-tab-order-details.php:68
+#: ../templates/dashboard-tab-order-details.php:70
 msgid "Referral Amount:"
 msgstr ""
 
@@ -111,7 +121,7 @@ msgstr ""
 msgid "Customer Billing Address:"
 msgstr ""
 
-#: ../templates/dashboard-tab-order-details.php:20
+#: ../templates/dashboard-tab-order-details.php:22
 msgid "Customer Information"
 msgstr ""
 
@@ -133,4 +143,8 @@ msgstr ""
 
 #: ../templates/dashboard-tab-order-details.php:99
 msgid "Billing Address:"
+msgstr ""
+
+#: ../templates/dashboard-tab-order-details.php:112
+msgid "There are currently no order details to display."
 msgstr ""
