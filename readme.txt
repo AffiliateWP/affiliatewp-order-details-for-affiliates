@@ -7,14 +7,37 @@ Stable tag: 1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Share customer purchase information with the affiliate who referred them.
+Allow affiliates to see order details on referrals they generated.
 
 == Description ==
 
 > This plugin requires [AffiliateWP](http://affiliatewp.com/ "AffiliateWP") <strong>It will NOT function without it.</strong>
 
-1. Customize the order details tab by copying the dashboard-tab-order-details.php template file to your child theme's "affiliatewp" folder
+This add-on adds a new area to the affiliate’s dashboard that allows a logged-in affiliate to see specific information about the order that their referral generated. Currently it works with both Easy Digital Downloads and WooCommerce. 
 
+Features:
+
+1. Affiliates can see order details for each referral they generated from their affiliate dashboard
+1. Globally enable access to the order details for all affiliates
+1. Enable access on a per-affiliate level to the order details
+1. Send an email to the affiliate with the order details included
+1. Disable specific information from showing to the affiliate
+
+The following details can be shown an affiliate who has access:
+
+1. Order Number
+1. Order Date
+1. Order Total
+1. Referral Amount
+1. Customer Name
+1. Customer Email
+1. Customer Phone (only available in WooCommerce)
+1. Customer Shipping Address (only available in WooCommerce)
+1. Customer Billing Address (only available in WooCommerce)
+
+These can also be easily turned off via a simple filter (see FAQ tab). In addition to disabling the information that is shown, you can customize the layout by editing the `dashboard-tab-order-details.php` template file from your child theme.
+
+The affiliate will also be emailed these details at the time the referral was created.
 
 **What is AffiliateWP?**
 
@@ -29,9 +52,18 @@ Share customer purchase information with the affiliate who referred them.
 
 OR you can just install it with WordPress by going to Plugins >> Add New >> and type this plugin's name
 
+Then you allow access in one of two ways: 
+
+1. Globally enable access for all affiliates. This can be done via the "Allow Global Access To Order Details" checkbox located in Affiliates &rarr; Settings &rarr; Misc.
+2. Enable access on a per-affiliate level. This can be done by editing an affiliate and enabling the "Order Details Access" checkbox located from Affiliates &rarr; Affiliates &rarr; Edit.
+
+Note: When there is global access, the checkbox on the edit affiliate screen is not shown.
+
 == Frequently Asked Questions ==
 
+= How can I disable certain information that is shown on the affiliate dashboard and email? =
 
+See this code snippet: https://gist.github.com/sumobi/5b04d903dcc2eb0dbe0f
 
 == Screenshots ==
 
