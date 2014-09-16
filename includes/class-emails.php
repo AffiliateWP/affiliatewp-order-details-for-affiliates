@@ -73,10 +73,10 @@ class AffiliateWP_Order_Details_For_Affiliates_Emails {
 	 */
 	public function get_email_message( $referral = array(), $affiliate_id = 0 ) {
 
-		$affwp_odfa = affiliatewp_order_details_for_affiliates();
-		$is_allowed = $affwp_odfa->order_details->allowed();
+		$affwp_odfa                = affiliatewp_order_details_for_affiliates();
+		$is_allowed                = $affwp_odfa->order_details->allowed();
 
-		$affiliate_name   = affiliate_wp()->affiliates->get_affiliate_name( $affiliate_id );
+		$affiliate_name            = affiliate_wp()->affiliates->get_affiliate_name( $affiliate_id );
 		
 		$order_number              = $affwp_odfa->order_details->get( $referral, 'order_number' );
 		$order_date                = $affwp_odfa->order_details->get( $referral, 'order_date' );
