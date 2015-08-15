@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: AffiliateWP - Order Details For Affiliates
- * Plugin URI: http://affiliatewp.com/addons/share-purchase-details/
+ * Plugin URI: http://affiliatewp.com/addons/order-details-affiliates/
  * Description: Share customer purchase information with the affiliate who referred them
  * Author: Pippin Williamson and Andrew Munro
  * Author URI: http://affiliatewp.com
@@ -49,6 +49,7 @@ final class AffiliateWP_Order_Details_For_Affiliates {
 	 */
 	public $order_details;
 	public $emails;
+	public $shortcodes;
 
 	/**
 	 * Main AffiliateWP_Order_Details_For_Affiliates Instance
@@ -75,6 +76,7 @@ final class AffiliateWP_Order_Details_For_Affiliates {
 
 			self::$instance->order_details = new AffiliateWP_Order_Details_For_Affiliates_Order_Details;
 			self::$instance->emails        = new AffiliateWP_Order_Details_For_Affiliates_Emails;
+			self::$instance->shortcodes    = new AffiliateWP_Order_Details_For_Affiliates_Shortcodes;
 		}
 
 		return self::$instance;
@@ -150,6 +152,7 @@ final class AffiliateWP_Order_Details_For_Affiliates {
 	private function includes() {
 		require_once self::$plugin_dir . 'includes/class-order-details.php';
 		require_once self::$plugin_dir . 'includes/class-emails.php';
+		require_once self::$plugin_dir . 'includes/class-shortcodes.php';
 
 		if ( is_admin() ) {
 			require_once self::$plugin_dir . 'includes/class-admin.php';
@@ -233,7 +236,7 @@ final class AffiliateWP_Order_Details_For_Affiliates {
 		<li class="affwp-affiliate-dashboard-tab<?php echo $active_tab == 'order-details' ? ' active' : ''; ?>">
 			<a href="<?php echo esc_url( add_query_arg( 'tab', 'order-details' ) ); ?>"><?php _e( 'Order Details', 'affiliate-wp' ); ?></a>
 		</li>
-	<?php	
+	<?php
 	}
 
 	/**
