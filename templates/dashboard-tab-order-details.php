@@ -15,11 +15,18 @@
 	<h4><?php _e( 'Order Details', 'affiliatewp-order-details-for-affiliates' ); ?></h4>
 
 	<?php if ( $referrals ) : ?>
+
+	<?php if ( $affwp_odfa->order_details->has( 'order_details' ) || $affwp_odfa->order_details->has( 'customer_details' ) ) : ?>
 	<table class="affwp-table">
 		<thead>
 			<tr>
+				<?php if ( $affwp_odfa->order_details->has( 'order_details' ) ) : ?>
 				<th><?php _e( 'Order Details', 'affiliatewp-order-details-for-affiliates' ); ?></th>
+				<?php endif; ?>
+
+				<?php if ( $affwp_odfa->order_details->has( 'customer_details' ) ) : ?>
 				<th><?php _e( 'Customer Information', 'affiliatewp-order-details-for-affiliates' ); ?></th>
+				<?php endif; ?>
 			</tr>
 		</thead>
 		<tbody>
@@ -41,6 +48,8 @@
 				do_action( 'affwp_odfa_referral_variables', $referral );
 			?>
 				<tr>
+
+					<?php if ( $affwp_odfa->order_details->has( 'order_details' ) ) : ?>
 					<td>
 						<?php do_action( 'affwp_odfa_order_details_start', $referral ); ?>
 
@@ -74,7 +83,9 @@
 
 						<?php do_action( 'affwp_odfa_order_details_end', $referral ); ?>
 					</td>
+					<?php endif; ?>
 
+					<?php if ( $affwp_odfa->order_details->has( 'customer_details' ) ) : ?>
 					<td>
 						<?php do_action( 'affwp_odfa_customer_details_start', $referral ); ?>
 
@@ -101,12 +112,15 @@
 
 						<?php do_action( 'affwp_odfa_customer_details_end', $referral ); ?>
 					</td>
+				<?php endif; ?>
+
 				</tr>
 				<?php
 			}
 		} ?>
 		</tbody>
 	</table>
+	<?php endif; ?>
 
 	<?php else : ?>
 		<p><?php _e( 'There are currently no order details to display.', 'affiliatewp-order-details-for-affiliates' ); ?></p>

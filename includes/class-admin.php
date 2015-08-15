@@ -94,7 +94,7 @@ class AffiliateWP_Order_Details_For_Affiliates_Admin {
 
 		$fields['odfa_disable_details'] = array(
 			'name' => __( 'Disable Details', 'affiliatewp-order-details-for-affiliates' ),
-			'desc' => __( 'Select which details should not show for the affiliate.', 'affiliatewp-order-details-for-affiliates' ),
+			'desc' => __( 'Select which details should not show for an affiliate.', 'affiliatewp-order-details-for-affiliates' ),
 			'type' => 'multicheck',
 			'options' => array(
 				'order_number'              => __( 'Order Number', 'affiliatewp-order-details-for-affiliates' ),

@@ -31,9 +31,56 @@ class AffiliateWP_Order_Details_For_Affiliates_Order_Details {
 	}
 
 	/**
+	 * Has customer details or order details
+	 *
+	 * @since 1.0.1
+	 * @return boolean
+	 */
+	public function has( $type = '' ) {
+
+		$is_allowed = affiliatewp_order_details_for_affiliates()->order_details->allowed();
+
+		switch ( $type ) {
+
+			case 'customer_details':
+
+				if (
+					$is_allowed['customer_name'] ||
+					$is_allowed['customer_email'] ||
+					$is_allowed['customer_phone'] ||
+					$is_allowed['customer_shipping_address'] ||
+					$is_allowed['customer_billing_address']
+
+				) {
+					return true;
+				}
+
+				break;
+
+			case 'order_details':
+
+				if (
+					$is_allowed['order_number'] ||
+					$is_allowed['order_total'] ||
+					$is_allowed['order_date'] ||
+					$is_allowed['referral_amount']
+
+				) {
+					return true;
+				}
+
+				break;
+
+		}
+
+		return false;
+	}
+
+	/**
 	 * Retrieve specific order information
 	 */
 	public function get( $referral = '', $info = '' ) {
+		
 		$is_allowed = $this->allowed();
 
 		switch ( $referral->context ) {
