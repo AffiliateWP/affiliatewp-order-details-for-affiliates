@@ -6,7 +6,7 @@ class AffiliateWP_Order_Details_For_Affiliates_Order_Details {
 
 	/**
 	 * Allowed order details
-	 * 
+	 *
 	 * @since 1.0
 	 * @return  array allowed order details
 	 */
@@ -50,7 +50,7 @@ class AffiliateWP_Order_Details_For_Affiliates_Order_Details {
 				if ( $info == 'order_date' ) {
 					return $is_allowed['order_date'] ? $payment_meta['date'] : '';
 				}
-				
+
 				if ( $info == 'order_total' ) {
 					return $is_allowed['order_total'] ? edd_currency_filter( edd_format_amount( edd_get_payment_amount( $referral->reference ) ) ) : '';
 				}
@@ -84,7 +84,7 @@ class AffiliateWP_Order_Details_For_Affiliates_Order_Details {
 				break;
 
 			case 'woocommerce':
-				
+
 				if ( ! class_exists( 'WC_Order' ) ) {
 					break;
 				}
@@ -92,13 +92,24 @@ class AffiliateWP_Order_Details_For_Affiliates_Order_Details {
 				$order = new WC_Order( $referral->reference );
 
 				if ( $info == 'order_number' ) {
-					return $is_allowed['order_number'] ? $referral->reference : '';
+
+					$seq_order_number = get_post_meta( $order->id, '_order_number', true );
+
+					// sequential order numbers compatibility
+					if ( $seq_order_number && class_exists( 'WC_Seq_Order_Number_Pro' ) ) {
+						$order_number = $seq_order_number;
+					} else {
+						$order_number = $referral->reference;
+					}
+
+					return $is_allowed['order_number'] ? $order_number : '';
+
 				}
 
 				if ( $info == 'order_date' ) {
 					return $is_allowed['order_date'] ? $order->order_date : '';
 				}
-				
+
 				if ( $info == 'order_total' ) {
 					return $is_allowed['order_total'] ? $order->get_formatted_order_total() : '';
 				}
@@ -123,7 +134,7 @@ class AffiliateWP_Order_Details_For_Affiliates_Order_Details {
 					return $is_allowed['customer_billing_address'] && $order->get_formatted_billing_address() ? $order->get_formatted_billing_address() : '';
 				}
 
-				break;	
+				break;
 		}
 
 		if ( $info == 'referral_amount' ) {
