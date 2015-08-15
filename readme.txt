@@ -13,7 +13,7 @@ Allow affiliates to see order details on referrals they generated.
 
 > This plugin requires [AffiliateWP](http://affiliatewp.com/ "AffiliateWP") <strong>It will NOT function without it.</strong>
 
-This add-on adds a new area to the affiliate’s dashboard that allows a logged-in affiliate to see specific information about the order that their referral generated. Currently it works with both Easy Digital Downloads and WooCommerce. 
+This add-on adds a new area to the affiliate’s dashboard that allows a logged-in affiliate to see specific information about the order that their referral generated. Currently it works with both Easy Digital Downloads and WooCommerce.
 
 Features:
 
@@ -52,7 +52,7 @@ The affiliate will also be emailed these details at the time the referral was cr
 
 OR you can just install it with WordPress by going to Plugins >> Add New >> and type this plugin's name
 
-Then you allow access in one of two ways: 
+Then you allow access in one of two ways:
 
 1. Globally enable access for all affiliates. This can be done via the "Allow Global Access To Order Details" checkbox located in Affiliates &rarr; Settings &rarr; Misc.
 2. Enable access on a per-affiliate level. This can be done by editing an affiliate and enabling the "Order Details Access" checkbox located from Affiliates &rarr; Affiliates &rarr; Edit.
@@ -70,6 +70,10 @@ See this code snippet: https://gist.github.com/sumobi/5b04d903dcc2eb0dbe0f
 == Upgrade Notice ==
 
 == Changelog ==
+
+= 1.0.1 =
+* New [affiliate_order_details] shortcode for showing the order details on any WordPress page
+* New: added support for WooCommerce Sequential Order Numbers Pro
 
 = 1.0 =
 * Initial release
