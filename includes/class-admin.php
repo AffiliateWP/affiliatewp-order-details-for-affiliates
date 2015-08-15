@@ -81,10 +81,32 @@ class AffiliateWP_Order_Details_For_Affiliates_Admin {
 	 */
 	public function order_details_access( $fields ) {
 
+		$fields['odfa_header'] = array(
+			'name' => __( 'Order Details for Affiliates', 'affiliatewp-order-details-for-affiliates' ),
+			'type' => 'header'
+		);
+
 		$fields['order_details_access'] = array(
 			'name' => __( 'Allow Global Access To Order Details', 'affiliatewp-order-details-for-affiliates' ),
 			'desc' => __( 'Check this box if you would like all affiliates to have access to order details.', 'affiliatewp-order-details-for-affiliates' ),
 			'type' => 'checkbox'
+		);
+
+		$fields['odfa_disable_details'] = array(
+			'name' => __( 'Disable Details', 'affiliatewp-order-details-for-affiliates' ),
+			'desc' => __( 'Select which details should not show for the affiliate.', 'affiliatewp-order-details-for-affiliates' ),
+			'type' => 'multicheck',
+			'options' => array(
+				'order_number'              => __( 'Order Number', 'affiliatewp-order-details-for-affiliates' ),
+				'order_date'                => __( 'Order Date', 'affiliatewp-order-details-for-affiliates' ),
+				'order_total'               => __( 'Order Total', 'affiliatewp-order-details-for-affiliates' ),
+				'referral_amount'           => __( 'Referral Amount', 'affiliatewp-order-details-for-affiliates' ),
+				'customer_name'             => __( 'Customer Name', 'affiliatewp-order-details-for-affiliates' ),
+				'customer_email'            => __( 'Customer Email', 'affiliatewp-order-details-for-affiliates' ),
+				'customer_phone'            => __( 'Customer Phone', 'affiliatewp-order-details-for-affiliates' ),
+				'customer_shipping_address' => __( 'Customer Shipping Address', 'affiliatewp-order-details-for-affiliates' ),
+				'customer_billing_address'  => __( 'Customer Billing Address', 'affiliatewp-order-details-for-affiliates' ),
+			),
 		);
 
 		return $fields;

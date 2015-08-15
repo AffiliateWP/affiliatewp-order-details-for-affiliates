@@ -12,16 +12,19 @@ class AffiliateWP_Order_Details_For_Affiliates_Order_Details {
 	 */
 	public function allowed() {
 
+		$disabled = affiliate_wp()->settings->get( 'odfa_disable_details' );
+		$disabled = $disabled ? $disabled : array();
+
 		$allowed = array(
-			'customer_name'             => true,
-			'customer_email'            => true,
-			'customer_billing_address'  => true,
-			'customer_shipping_address' => true,
-			'customer_phone'            => true,
-			'order_number'              => true,
-			'order_total'               => true,
-			'order_date'                => true,
-			'referral_amount'           => true
+			'customer_name'             => array_key_exists( 'customer_name', $disabled ) ? false : true,
+			'customer_email'            => array_key_exists( 'customer_email', $disabled ) ? false : true,
+			'customer_billing_address'  => array_key_exists( 'customer_billing_address', $disabled ) ? false : true,
+			'customer_shipping_address' => array_key_exists( 'customer_shipping_address', $disabled ) ? false : true,
+			'customer_phone'            => array_key_exists( 'customer_phone', $disabled ) ? false : true,
+			'order_number'              => array_key_exists( 'order_number', $disabled ) ? false : true,
+			'order_total'               => array_key_exists( 'order_total', $disabled ) ? false : true,
+			'order_date'                => array_key_exists( 'order_date', $disabled ) ? false : true,
+			'referral_amount'           => array_key_exists( 'referral_amount', $disabled ) ? false : true,
 		);
 
 		return (array) apply_filters( 'affwp_odfa_allowed_details', $allowed );
