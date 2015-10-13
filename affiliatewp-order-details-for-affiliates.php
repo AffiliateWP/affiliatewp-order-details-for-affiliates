@@ -5,7 +5,7 @@
  * Description: Share customer purchase information with the affiliate who referred them
  * Author: Pippin Williamson and Andrew Munro
  * Author URI: http://affiliatewp.com
- * Version: 1.1
+ * Version: 1.1.1
  * Text Domain: affiliatewp-order-details-for-affiliates
  * Domain Path: languages
  *
@@ -68,7 +68,7 @@ final class AffiliateWP_Order_Details_For_Affiliates {
 
 			self::$plugin_dir = plugin_dir_path( __FILE__ );
 			self::$plugin_url = plugin_dir_url( __FILE__ );
-			self::$version    = '1.1';
+			self::$version    = '1.1.1';
 
 			self::$instance->load_textdomain();
 			self::$instance->includes();
@@ -191,7 +191,7 @@ final class AffiliateWP_Order_Details_For_Affiliates {
 	 * @return void
 	 */
 	public function no_access() {
-		if ( $this->is_order_details_tab() && ! ( $this->can_access_order_details( affwp_get_affiliate_user_id( affwp_get_affiliate_id() ) ) || $this->global_order_details_access() ) ) {
+		if ( $this->is_order_details_tab() && ! ( $this->can_access_order_details() || $this->global_order_details_access() ) ) {
 			wp_redirect( affiliate_wp()->login->get_login_url() ); exit;
 		}
 	}
@@ -228,7 +228,7 @@ final class AffiliateWP_Order_Details_For_Affiliates {
 	 * @return void
 	 */
 	public function add_order_details_tab( $affiliate_id, $active_tab ) {
-		if ( ! ( $this->can_access_order_details( affwp_get_affiliate_user_id( $affiliate_id ) ) || $this->global_order_details_access() ) ) {
+		if ( ! ( $this->can_access_order_details() || $this->global_order_details_access() ) ) {
 			return;
 		}
 
@@ -259,8 +259,17 @@ final class AffiliateWP_Order_Details_For_Affiliates {
 	 *
 	 * @return boolean
 	 */
-	public function can_access_order_details( $affiliate_id ) {
-		$can_receive = get_user_meta( $affiliate_id, 'affwp_order_details_access', true );
+	public function can_access_order_details( $user_id = 0 ) {
+
+		// use user ID passed in, else get current user ID
+		$user_id = $user_id ? $user_id : get_current_user_id();
+
+		if ( ! $user_id ) {
+			return false;
+		}
+
+		// look up meta
+		$can_receive = get_user_meta( $user_id, 'affwp_order_details_access', true );
 
 		if ( $can_receive ) {
 			return (bool) true;

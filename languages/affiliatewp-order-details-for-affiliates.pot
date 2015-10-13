@@ -1,7 +1,8 @@
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: AffiliateWP - Order Details For Affiliates\n"
-"POT-Creation-Date: 2014-09-16 16:55+1200\n"
+"POT-Creation-Date: 2015-10-13 23:09+1300\n"
 "PO-Revision-Date: 2014-09-16 16:55+1200\n"
 "Last-Translator: Andrew Munro, Sumobi <andrew@sumobi.com>\n"
 "Language-Team: AffiliateWP <support@affiliatewp.com>\n"
@@ -9,29 +10,29 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.6.5\n"
+"X-Generator: Poedit 1.8.5\n"
 "X-Poedit-KeywordsList: __;_e\n"
 "X-Poedit-Basepath: .\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-SearchPath-0: ..\n"
 
-#: ../affiliatewp-order-details-for-affiliates.php:95
-#: ../affiliatewp-order-details-for-affiliates.php:107
+#: ../affiliatewp-order-details-for-affiliates.php:97
+#: ../affiliatewp-order-details-for-affiliates.php:109
 msgid "Cheatin&#8217; huh?"
 msgstr ""
 
-#: ../affiliatewp-order-details-for-affiliates.php:234
-#: ../templates/dashboard-tab-order-details.php:15
-#: ../templates/dashboard-tab-order-details.php:21
+#: ../affiliatewp-order-details-for-affiliates.php:237
+#: ../templates/dashboard-tab-order-details.php:17
+#: ../templates/dashboard-tab-order-details.php:26
 msgid "Order Details"
 msgstr ""
 
-#: ../affiliatewp-order-details-for-affiliates.php:298
+#: ../affiliatewp-order-details-for-affiliates.php:301
 msgid "Get more add-ons for AffiliateWP"
 msgstr ""
 
-#: ../affiliatewp-order-details-for-affiliates.php:298
+#: ../affiliatewp-order-details-for-affiliates.php:301
 msgid "Get add-ons"
 msgstr ""
 
@@ -60,13 +61,61 @@ msgid ""
 msgstr ""
 
 #: ../includes/class-admin.php:85
+msgid "Order Details for Affiliates"
+msgstr ""
+
+#: ../includes/class-admin.php:90
 msgid "Allow Global Access To Order Details"
 msgstr ""
 
-#: ../includes/class-admin.php:86
+#: ../includes/class-admin.php:91
 msgid ""
 "Check this box if you would like all affiliates to have access to order "
 "details."
+msgstr ""
+
+#: ../includes/class-admin.php:96
+msgid "Disable Details"
+msgstr ""
+
+#: ../includes/class-admin.php:97
+msgid "Select which details should not show for an affiliate."
+msgstr ""
+
+#: ../includes/class-admin.php:100
+msgid "Order Number"
+msgstr ""
+
+#: ../includes/class-admin.php:101
+msgid "Order Date"
+msgstr ""
+
+#: ../includes/class-admin.php:102
+msgid "Order Total"
+msgstr ""
+
+#: ../includes/class-admin.php:103
+msgid "Referral Amount"
+msgstr ""
+
+#: ../includes/class-admin.php:104
+msgid "Customer Name"
+msgstr ""
+
+#: ../includes/class-admin.php:105
+msgid "Customer Email"
+msgstr ""
+
+#: ../includes/class-admin.php:106
+msgid "Customer Phone"
+msgstr ""
+
+#: ../includes/class-admin.php:107
+msgid "Customer Shipping Address"
+msgstr ""
+
+#: ../includes/class-admin.php:108
+msgid "Customer Billing Address"
 msgstr ""
 
 #: ../includes/class-emails.php:45
@@ -82,22 +131,22 @@ msgid "Here are the order details for your most recent referral:"
 msgstr ""
 
 #: ../includes/class-emails.php:100
-#: ../templates/dashboard-tab-order-details.php:49
+#: ../templates/dashboard-tab-order-details.php:60
 msgid "Order Number:"
 msgstr ""
 
 #: ../includes/class-emails.php:107
-#: ../templates/dashboard-tab-order-details.php:56
+#: ../templates/dashboard-tab-order-details.php:67
 msgid "Order Date:"
 msgstr ""
 
 #: ../includes/class-emails.php:114
-#: ../templates/dashboard-tab-order-details.php:63
+#: ../templates/dashboard-tab-order-details.php:74
 msgid "Order Total:"
 msgstr ""
 
 #: ../includes/class-emails.php:121
-#: ../templates/dashboard-tab-order-details.php:70
+#: ../templates/dashboard-tab-order-details.php:81
 msgid "Referral Amount:"
 msgstr ""
 
@@ -121,30 +170,30 @@ msgstr ""
 msgid "Customer Billing Address:"
 msgstr ""
 
-#: ../templates/dashboard-tab-order-details.php:22
+#: ../templates/dashboard-tab-order-details.php:30
 msgid "Customer Information"
 msgstr ""
 
-#: ../templates/dashboard-tab-order-details.php:82
+#: ../templates/dashboard-tab-order-details.php:95
 msgid "Name:"
 msgstr ""
 
-#: ../templates/dashboard-tab-order-details.php:86
+#: ../templates/dashboard-tab-order-details.php:99
 msgid "Email:"
 msgstr ""
 
-#: ../templates/dashboard-tab-order-details.php:90
+#: ../templates/dashboard-tab-order-details.php:103
 msgid "Phone:"
 msgstr ""
 
-#: ../templates/dashboard-tab-order-details.php:95
+#: ../templates/dashboard-tab-order-details.php:108
 msgid "Shipping Address:"
 msgstr ""
 
-#: ../templates/dashboard-tab-order-details.php:99
+#: ../templates/dashboard-tab-order-details.php:112
 msgid "Billing Address:"
 msgstr ""
 
-#: ../templates/dashboard-tab-order-details.php:112
+#: ../templates/dashboard-tab-order-details.php:128
 msgid "There are currently no order details to display."
 msgstr ""

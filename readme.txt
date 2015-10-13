@@ -3,7 +3,7 @@ Contributors: sumobi, mordauk
 Tags: AffiliateWP, affiliate, Pippin Williamson, Andrew Munro, mordauk, pippinsplugins, sumobi, ecommerce, e-commerce, e commerce, selling, membership, referrals, marketing
 Requires at least: 3.3
 Tested up to: 4.3.1
-Stable tag: 1.1
+Stable tag: 1.1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -69,13 +69,18 @@ See this code snippet: https://gist.github.com/sumobi/5b04d903dcc2eb0dbe0f
 
 == Upgrade Notice ==
 
+Fix: The [affiliate_order_details] shortcode was not checking to see if the affiliate had access to the order details
+
 == Changelog ==
+
+= 1.1.1 =
+* Fix: The [affiliate_order_details] shortcode was not checking to see if the affiliate had access to the order details
 
 = 1.1 =
 * New [affiliate_order_details] shortcode for showing the order details on any WordPress page
-* New: Added support for WooCommerce Sequential Order Numbers Pro
-* New: Hide columns if details are disabled
-* New: Disable specific details from showing with new admin checkbox options
+* New: Support for WooCommerce Sequential Order Numbers Pro
+* New: Table columns will now disappear if all details in that table column is hidden
+* New: Specific details can be hidden by enabling admin checkboxes
 * Tweak: Moved add-on settings to the "integrations" tab of AffiliateWP
 * Tweak: Show "unpaid" referrals by default. This can be changed via the affwp_odfa_referral_args filter
 

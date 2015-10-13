@@ -64,7 +64,7 @@ class AffiliateWP_Order_Details_For_Affiliates_Admin {
 				</th>
 				<td>
 					<input type="checkbox" name="order_details_access" id="order-details-access" value="1" <?php checked( $checked, 1 ); ?> />
-					<p class="description"><?php _e( 'Allow affiliate to see the order details for each referral on their affiliate dashboard.', 'affiliatewp-order-details-for-affiliates' ); ?></p>
+					<p class="description"><?php _e( 'Allow affiliate to see order details for each referral.', 'affiliatewp-order-details-for-affiliates' ); ?></p>
 				</td>
 			</tr>
 		</table>
@@ -87,7 +87,7 @@ class AffiliateWP_Order_Details_For_Affiliates_Admin {
 		);
 
 		$fields['order_details_access'] = array(
-			'name' => __( 'Allow Global Access To Order Details', 'affiliatewp-order-details-for-affiliates' ),
+			'name' => __( 'Allow Global Access', 'affiliatewp-order-details-for-affiliates' ),
 			'desc' => __( 'Check this box if you would like all affiliates to have access to order details.', 'affiliatewp-order-details-for-affiliates' ),
 			'type' => 'checkbox'
 		);

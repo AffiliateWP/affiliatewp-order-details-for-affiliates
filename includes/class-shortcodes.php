@@ -37,6 +37,10 @@ class AffiliateWP_Order_Details_For_Affiliates_Shortcodes {
     		return;
     	}
 
+		if ( ! ( affiliatewp_order_details_for_affiliates()->can_access_order_details() || affiliatewp_order_details_for_affiliates()->global_order_details_access() ) ) {
+			return;
+		}
+
     	ob_start();
 
     	affiliate_wp()->templates->get_template_part( 'dashboard-tab', 'order-details' );
