@@ -2,8 +2,8 @@
 Contributors: sumobi, mordauk
 Tags: AffiliateWP, affiliate, Pippin Williamson, Andrew Munro, mordauk, pippinsplugins, sumobi, ecommerce, e-commerce, e commerce, selling, membership, referrals, marketing
 Requires at least: 3.3
-Tested up to: 4.0
-Stable tag: 1.0
+Tested up to: 4.3.1
+Stable tag: 1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -71,9 +71,17 @@ See this code snippet: https://gist.github.com/sumobi/5b04d903dcc2eb0dbe0f
 
 == Changelog ==
 
-= 1.0.1 =
+= 1.1 =
 * New [affiliate_order_details] shortcode for showing the order details on any WordPress page
-* New: added support for WooCommerce Sequential Order Numbers Pro
+* New: Added support for WooCommerce Sequential Order Numbers Pro
+* New: Hide columns if details are disabled
+* New: Disable specific details from showing with new admin checkbox options
+* Tweak: Moved add-on settings to the "integrations" tab of AffiliateWP
+* Tweak: Show "unpaid" referrals by default. This can be changed via the affwp_odfa_referral_args filter
+
+= 1.0.1 =
+* New: EDD integration now supports Shipping Address provided by EDD's [Simple Shipping](https://easydigitaldownloads.com/extensions/simple-shipping/ "Simple Shipping")
+* New: EDD integration now supports Billing Address provided by payment gateways
 
 = 1.0 =
 * Initial release
