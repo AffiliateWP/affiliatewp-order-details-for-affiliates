@@ -22,6 +22,7 @@ Features:
 1. Enable access on a per-affiliate level to the order details
 1. Send an email to the affiliate with the order details included
 1. Disable specific information from showing to the affiliate
+1. A [affiliate_order_details] shortcode for showing the order details on any WordPress page
 
 The following details can be shown an affiliate who has access:
 
