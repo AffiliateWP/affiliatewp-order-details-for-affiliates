@@ -181,6 +181,11 @@ final class AffiliateWP_Order_Details_For_Affiliates {
 
 		// Add template folder to hold the customer table
 		add_filter( 'affwp_template_paths', array( $this, 'get_theme_template_paths' ) );
+
+		// Add to the tabs list for 1.8.1 (fails silently if the hook doesn't exist).
+		add_filter( 'affwp_affiliate_area_tabs', function( $tabs ) {
+			return array_merge( $tabs, array( 'order-details' ) );
+		} );
 	}
 
 	/**
