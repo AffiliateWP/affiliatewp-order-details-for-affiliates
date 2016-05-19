@@ -2,8 +2,8 @@
 Contributors: sumobi, mordauk
 Tags: AffiliateWP, affiliate, Pippin Williamson, Andrew Munro, mordauk, pippinsplugins, sumobi, ecommerce, e-commerce, e commerce, selling, membership, referrals, marketing
 Requires at least: 3.3
-Tested up to: 4.3.1
-Stable tag: 1.1.1
+Tested up to: 4.5.2
+Stable tag: 1.1.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -73,6 +73,9 @@ See this code snippet: https://gist.github.com/sumobi/5b04d903dcc2eb0dbe0f
 Fix: The [affiliate_order_details] shortcode was not checking to see if the affiliate had access to the order details
 
 == Changelog ==
+
+= 1.1.2 =
+* Fix: An issue with the tab's content not loading correctly due to recent changes made in AffiliateWP v1.8.1
 
 = 1.1.1 =
 * Fix: The [affiliate_order_details] shortcode was not checking to see if the affiliate had access to the order details
