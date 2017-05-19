@@ -45,10 +45,27 @@ final class AffiliateWP_Order_Details_For_Affiliates {
 	private static $version;
 
 	/**
-	 * Class Properties
+	 * Order Details instance.
+	 *
+	 * @access public
+	 * @var    \AffiliateWP_Order_Details_For_Affiliates_Order_Details
 	 */
 	public $order_details;
+
+	/**
+	 * Emails instance.
+	 *
+	 * @access public
+	 * @var    \AffiliateWP_Order_Details_For_Affiliates_Emails
+	 */
 	public $emails;
+
+	/**
+	 * Shortcodes instance.
+	 *
+	 * @access public
+	 * @var    \AffiliateWP_Order_Details_For_Affiliates_Shortcodes
+	 */
 	public $shortcodes;
 
 	/**
