@@ -53,22 +53,50 @@ class AffiliateWP_Order_Details_For_Affiliates_Order_Details {
 				break;
 
 			case 'woocommerce':
-				try {
-					$order = new WC_Order( $referral->reference );
-				} catch ( Exception $e ) {
-					if ( method_exists( 'Affiliate_WP_Utilities', 'log' ) ) {
-						affiliate_wp()->utils->log( sprintf( 'Invalid order ID #%1$s for referral #%2$s in the Order Details tab.', $referral->reference, $referral->referral_id ) );
+
+				if ( affiliatewp_order_details_for_affiliates()->woocommerce_is_300() ) {
+
+					try {
+						$order = new WC_Order( $referral->reference );
+					} catch ( Exception $e ) {
+
+						$this->woocommerce_order_error( $referral );
+
+						$exists = false;
 					}
 
-					esc_html_e( 'No data could be found for the current order.', 'affiliatewp-order-details-for-affiliates' );
+				} else {
 
-					$exists = false;
+					$order = new WC_Order( $referral->reference );
+
+					if ( $order->id <= 0 ) {
+						$this->woocommerce_order_error( $referral );
+
+						$exists = false;
+					}
+
 				}
 
 				break;
 		}
 
 		return $exists;
+	}
+
+	/**
+	 * Handles messaging/logging output in the event of a WooCommerce order error on retrieval.
+	 *
+	 * @access private
+	 * @since  1.1.3
+	 *
+	 * @param \AffWP\Referral $referral Referral object.
+	 */
+	private function woocommerce_order_error( $referral ) {
+		if ( method_exists( 'Affiliate_WP_Utilities', 'log' ) ) {
+			affiliate_wp()->utils->log( sprintf( 'Invalid order ID #%1$s for referral #%2$s in the Order Details tab.', $referral->reference, $referral->referral_id ) );
+		}
+
+		esc_html_e( 'No data could be found for the current order.', 'affiliatewp-order-details-for-affiliates' );
 	}
 
 	/**
