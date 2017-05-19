@@ -5,7 +5,7 @@
  * Description: Share customer purchase information with the affiliate who referred them
  * Author: Pippin Williamson and Andrew Munro
  * Author URI: http://affiliatewp.com
- * Version: 1.1.2
+ * Version: 1.1.3
  * Text Domain: affiliatewp-order-details-for-affiliates
  * Domain Path: languages
  *
@@ -24,7 +24,7 @@
  * @package Order Details For Affiliates
  * @category Core
  * @author Andrew Munro
- * @version 1.1.2
+ * @version 1.1.3
  */
 
 // Exit if accessed directly
@@ -85,7 +85,7 @@ final class AffiliateWP_Order_Details_For_Affiliates {
 
 			self::$plugin_dir = plugin_dir_path( __FILE__ );
 			self::$plugin_url = plugin_dir_url( __FILE__ );
-			self::$version    = '1.1.2';
+			self::$version    = '1.1.3';
 
 			self::$instance->load_textdomain();
 			self::$instance->includes();
