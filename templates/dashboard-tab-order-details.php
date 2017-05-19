@@ -37,6 +37,11 @@
 
 			foreach ( $referrals as $referral ) {
 
+				// Skip output if the order doesn't exist.
+				if ( ! $affwp_odfa->order_details->exists( $referral ) ) {
+					continue;
+				}
+
 				$order_number              = $affwp_odfa->order_details->get( $referral, 'order_number' );
 				$order_date                = $affwp_odfa->order_details->get( $referral, 'order_date' );
 				$order_total               = $affwp_odfa->order_details->get( $referral, 'order_total' );

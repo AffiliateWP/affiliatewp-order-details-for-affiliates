@@ -1,11 +1,11 @@
 <?php
 /**
  * Plugin Name: AffiliateWP - Order Details For Affiliates
- * Plugin URI: http://affiliatewp.com/addons/order-details-affiliates/
- * Description: Share customer purchase information with the affiliate who referred them
- * Author: Pippin Williamson and Andrew Munro
- * Author URI: http://affiliatewp.com
- * Version: 1.1.2
+ * Plugin URI: https://affiliatewp.com/addons/order-details-affiliates/
+ * Description: Share customer purchase information with the affiliate who referred them.
+ * Author: AffiliateWP
+ * Author URI: https://affiliatewp.com
+ * Version: 1.1.3
  * Text Domain: affiliatewp-order-details-for-affiliates
  * Domain Path: languages
  *
@@ -23,8 +23,8 @@
  *
  * @package Order Details For Affiliates
  * @category Core
- * @author Andrew Munro
- * @version 1.1.2
+ * @author AffiliateWP
+ * @version 1.1.3
  */
 
 // Exit if accessed directly
@@ -45,10 +45,27 @@ final class AffiliateWP_Order_Details_For_Affiliates {
 	private static $version;
 
 	/**
-	 * Class Properties
+	 * Order Details instance.
+	 *
+	 * @access public
+	 * @var    \AffiliateWP_Order_Details_For_Affiliates_Order_Details
 	 */
 	public $order_details;
+
+	/**
+	 * Emails instance.
+	 *
+	 * @access public
+	 * @var    \AffiliateWP_Order_Details_For_Affiliates_Emails
+	 */
 	public $emails;
+
+	/**
+	 * Shortcodes instance.
+	 *
+	 * @access public
+	 * @var    \AffiliateWP_Order_Details_For_Affiliates_Shortcodes
+	 */
 	public $shortcodes;
 
 	/**
@@ -68,7 +85,7 @@ final class AffiliateWP_Order_Details_For_Affiliates {
 
 			self::$plugin_dir = plugin_dir_path( __FILE__ );
 			self::$plugin_url = plugin_dir_url( __FILE__ );
-			self::$version    = '1.1.2';
+			self::$version    = '1.1.3';
 
 			self::$instance->load_textdomain();
 			self::$instance->includes();
@@ -320,6 +337,25 @@ final class AffiliateWP_Order_Details_For_Affiliates {
 
 	    return $links;
 	}
+
+	/**
+	 * Determines whether WooCommerce is version 3.0.0+ or not.
+	 *
+	 * @access public
+	 * @since  1.1.3
+	 *
+	 * @return bool True if WooCommerce 3.0.0+, otherwise false.
+	 */
+	public function woocommerce_is_300() {
+		$wc_is_300 = false;
+
+		if ( function_exists( 'WC' ) && true === version_compare( WC()->version, '3.0.0', '>=' ) ) {
+			$wc_is_300 = true;
+		}
+
+		return $wc_is_300;
+	}
+
 }
 
 /**
@@ -332,7 +368,7 @@ final class AffiliateWP_Order_Details_For_Affiliates {
  * Example: <?php $affiliatewp_order_details_for_affiliates = affiliatewp_order_details_for_affiliates(); ?>
  *
  * @since 1.0
- * @return object The one true AffiliateWP_Order_Details_For_Affiliates Instance
+ * @return \AffiliateWP_Order_Details_For_Affiliates The one true AffiliateWP_Order_Details_For_Affiliates Instance
  */
 function affiliatewp_order_details_for_affiliates() {
     if ( ! class_exists( 'Affiliate_WP' ) ) {

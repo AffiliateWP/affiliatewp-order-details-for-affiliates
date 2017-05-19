@@ -1,9 +1,9 @@
 === AffiliateWP - Order Details For Affiliates ===
-Contributors: sumobi, mordauk
+Contributors: sumobi, mordauk, drewapicture
 Tags: AffiliateWP, affiliate, Pippin Williamson, Andrew Munro, mordauk, pippinsplugins, sumobi, ecommerce, e-commerce, e commerce, selling, membership, referrals, marketing
 Requires at least: 3.3
-Tested up to: 4.5.2
-Stable tag: 1.1.2
+Tested up to: 4.7.5
+Stable tag: 1.1.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -55,7 +55,7 @@ OR you can just install it with WordPress by going to Plugins >> Add New >> and 
 
 Then you allow access in one of two ways:
 
-1. Globally enable access for all affiliates. This can be done via the "Allow Global Access To Order Details" checkbox located in Affiliates &rarr; Settings &rarr; Misc.
+1. Globally enable access for all affiliates. This can be done via the "Allow Global Access To Order Details" checkbox located in Affiliates &rarr; Settings &rarr; Integrations.
 2. Enable access on a per-affiliate level. This can be done by editing an affiliate and enabling the "Order Details Access" checkbox located from Affiliates &rarr; Affiliates &rarr; Edit.
 
 Note: When there is global access, the checkbox on the edit affiliate screen is not shown.
@@ -73,6 +73,10 @@ See this code snippet: https://gist.github.com/sumobi/5b04d903dcc2eb0dbe0f
 Fix: The [affiliate_order_details] shortcode was not checking to see if the affiliate had access to the order details
 
 == Changelog ==
+
+= 1.1.3 =
+* Fix: Avoid a fatal error in WooCommerce 3.0.0+ on the Order Details tab when an order doesn't exist
+* Fix: Other WooCommerce 3.0.0+ compatibility fixes
 
 = 1.1.2 =
 * Fix: An issue with the tab's content not loading correctly due to recent changes made in AffiliateWP v1.8.1

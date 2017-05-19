@@ -31,6 +31,75 @@ class AffiliateWP_Order_Details_For_Affiliates_Order_Details {
 	}
 
 	/**
+	 * Determines if the order attached to the referral actually exists.
+	 *
+	 * @access public
+	 * @since  1.1.3
+	 *
+	 * @param int|\AffWP\Referral $referral Referral object or ID.
+	 * @return bool True if the order exists, otherwise false.
+	 */
+	public function exists( $referral ) {
+		$exists = true;
+
+		switch( $referral->context ) {
+			case 'edd':
+				if ( ! function_exists( 'edd_get_payment' )
+					|| ( function_exists( 'edd_get_payment' ) && ! edd_get_payment( $referral->reference ) )
+				) {
+					$exists = false;
+				}
+
+				break;
+
+			case 'woocommerce':
+
+				if ( affiliatewp_order_details_for_affiliates()->woocommerce_is_300() ) {
+
+					try {
+						$order = new WC_Order( $referral->reference );
+					} catch ( Exception $e ) {
+
+						$this->woocommerce_order_error( $referral );
+
+						$exists = false;
+					}
+
+				} else {
+
+					$order = new WC_Order( $referral->reference );
+
+					if ( $order->id <= 0 ) {
+						$this->woocommerce_order_error( $referral );
+
+						$exists = false;
+					}
+
+				}
+
+				break;
+		}
+
+		return $exists;
+	}
+
+	/**
+	 * Handles messaging/logging output in the event of a WooCommerce order error on retrieval.
+	 *
+	 * @access private
+	 * @since  1.1.3
+	 *
+	 * @param \AffWP\Referral $referral Referral object.
+	 */
+	private function woocommerce_order_error( $referral ) {
+		if ( method_exists( 'Affiliate_WP_Utilities', 'log' ) ) {
+			affiliate_wp()->utils->log( sprintf( 'Invalid order ID #%1$s for referral #%2$s in the Order Details tab.', $referral->reference, $referral->referral_id ) );
+		}
+
+		esc_html_e( 'No data could be found for the current order.', 'affiliatewp-order-details-for-affiliates' );
+	}
+
+	/**
 	 * Has customer details or order details
 	 *
 	 * @since 1.0.1
@@ -143,7 +212,13 @@ class AffiliateWP_Order_Details_For_Affiliates_Order_Details {
 
 				if ( $info == 'order_number' ) {
 
-					$seq_order_number = get_post_meta( $order->id, '_order_number', true );
+					if ( affiliatewp_order_details_for_affiliates()->woocommerce_is_300() ) {
+						$order_id = $order->get_id();
+					} else {
+						$order_id = $order->id;
+					}
+
+					$seq_order_number = get_post_meta( $order_id, '_order_number', true );
 
 					// sequential order numbers compatibility
 					if ( $seq_order_number && class_exists( 'WC_Seq_Order_Number_Pro' ) ) {
@@ -157,7 +232,13 @@ class AffiliateWP_Order_Details_For_Affiliates_Order_Details {
 				}
 
 				if ( $info == 'order_date' ) {
-					return $is_allowed['order_date'] ? $order->order_date : '';
+					if ( affiliatewp_order_details_for_affiliates()->woocommerce_is_300() ) {
+						$order_date = $order->get_date_created();
+					} else {
+						$order_date = $order->order_date;
+					}
+
+					return $is_allowed['order_date'] ? $order_date : '';
 				}
 
 				if ( $info == 'order_total' ) {
@@ -165,15 +246,33 @@ class AffiliateWP_Order_Details_For_Affiliates_Order_Details {
 				}
 
 				if ( $info == 'customer_name' ) {
-					return $is_allowed['customer_name'] && $order->billing_first_name ? $order->billing_first_name : '';
+					if ( affiliatewp_order_details_for_affiliates()->woocommerce_is_300() ) {
+						$billing_first_name = $order->get_billing_first_name();
+					} else {
+						$billing_first_name = $order->billing_first_name;
+					}
+
+					return $is_allowed['customer_name'] && $billing_first_name ? $billing_first_name : '';
 				}
 
 				if ( $info == 'customer_email' ) {
-					return $is_allowed['customer_email'] && $order->billing_email ? $order->billing_email : '';
+					if ( affiliatewp_order_details_for_affiliates()->woocommerce_is_300() ) {
+						$billing_email = $order->get_billing_email();
+					} else {
+						$billing_email = $order->billing_email;
+					}
+
+					return $is_allowed['customer_email'] && $billing_email ? $billing_email : '';
 				}
 
 				if ( $info == 'customer_phone' ) {
-					return $is_allowed['customer_phone'] && $order->billing_phone ? $order->billing_phone : '';
+					if ( affiliatewp_order_details_for_affiliates()->woocommerce_is_300() ) {
+						$billing_phone = $order->get_billing_phone();
+					} else {
+						$billing_phone = $order->billing_phone;
+					}
+
+					return $is_allowed['customer_phone'] && $billing_phone ? $billing_phone : '';
 				}
 
 				if ( $info == 'customer_shipping_address' ) {
