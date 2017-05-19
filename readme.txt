@@ -1,5 +1,5 @@
 === AffiliateWP - Order Details For Affiliates ===
-Contributors: sumobi, mordauk
+Contributors: sumobi, mordauk, drewapicture
 Tags: AffiliateWP, affiliate, Pippin Williamson, Andrew Munro, mordauk, pippinsplugins, sumobi, ecommerce, e-commerce, e commerce, selling, membership, referrals, marketing
 Requires at least: 3.3
 Tested up to: 4.7.5

@@ -1,10 +1,10 @@
 <?php
 /**
  * Plugin Name: AffiliateWP - Order Details For Affiliates
- * Plugin URI: http://affiliatewp.com/addons/order-details-affiliates/
- * Description: Share customer purchase information with the affiliate who referred them
- * Author: Pippin Williamson and Andrew Munro
- * Author URI: http://affiliatewp.com
+ * Plugin URI: https://affiliatewp.com/addons/order-details-affiliates/
+ * Description: Share customer purchase information with the affiliate who referred them.
+ * Author: AffiliateWP
+ * Author URI: https://affiliatewp.com
  * Version: 1.1.3
  * Text Domain: affiliatewp-order-details-for-affiliates
  * Domain Path: languages
@@ -23,7 +23,7 @@
  *
  * @package Order Details For Affiliates
  * @category Core
- * @author Andrew Munro
+ * @author AffiliateWP
  * @version 1.1.3
  */
 
