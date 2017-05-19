@@ -74,6 +74,10 @@ Fix: The [affiliate_order_details] shortcode was not checking to see if the affi
 
 == Changelog ==
 
+= 1.1.3 =
+* Fix: Avoid a fatal error in WooCommerce 3.0.0+ on the Order Details tab when an order doesn't exist
+* Fix: Other WooCommerce 3.0.0+ compatibility fixes
+
 = 1.1.2 =
 * Fix: An issue with the tab's content not loading correctly due to recent changes made in AffiliateWP v1.8.1
 
