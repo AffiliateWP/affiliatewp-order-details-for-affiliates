@@ -143,7 +143,13 @@ class AffiliateWP_Order_Details_For_Affiliates_Order_Details {
 
 				if ( $info == 'order_number' ) {
 
-					$seq_order_number = get_post_meta( $order->id, '_order_number', true );
+					if ( affiliatewp_order_details_for_affiliates()->woocommerce_is_300() ) {
+						$order_id = $order->get_id();
+					} else {
+						$order_id = $order->id;
+					}
+
+					$seq_order_number = get_post_meta( $order_id, '_order_number', true );
 
 					// sequential order numbers compatibility
 					if ( $seq_order_number && class_exists( 'WC_Seq_Order_Number_Pro' ) ) {
@@ -157,7 +163,13 @@ class AffiliateWP_Order_Details_For_Affiliates_Order_Details {
 				}
 
 				if ( $info == 'order_date' ) {
-					return $is_allowed['order_date'] ? $order->order_date : '';
+					if ( affiliatewp_order_details_for_affiliates()->woocommerce_is_300() ) {
+						$order_date = $order->get_date_created();
+					} else {
+						$order_date = $order->order_date;
+					}
+
+					return $is_allowed['order_date'] ? $order_date : '';
 				}
 
 				if ( $info == 'order_total' ) {
@@ -165,15 +177,33 @@ class AffiliateWP_Order_Details_For_Affiliates_Order_Details {
 				}
 
 				if ( $info == 'customer_name' ) {
-					return $is_allowed['customer_name'] && $order->billing_first_name ? $order->billing_first_name : '';
+					if ( affiliatewp_order_details_for_affiliates()->woocommerce_is_300() ) {
+						$billing_first_name = $order->get_billing_first_name();
+					} else {
+						$billing_first_name = $order->billing_first_name;
+					}
+
+					return $is_allowed['customer_name'] && $billing_first_name ? $billing_first_name : '';
 				}
 
 				if ( $info == 'customer_email' ) {
-					return $is_allowed['customer_email'] && $order->billing_email ? $order->billing_email : '';
+					if ( affiliatewp_order_details_for_affiliates()->woocommerce_is_300() ) {
+						$billing_email = $order->get_billing_email();
+					} else {
+						$billing_email = $order->billing_email;
+					}
+
+					return $is_allowed['customer_email'] && $billing_email ? $billing_email : '';
 				}
 
 				if ( $info == 'customer_phone' ) {
-					return $is_allowed['customer_phone'] && $order->billing_phone ? $order->billing_phone : '';
+					if ( affiliatewp_order_details_for_affiliates()->woocommerce_is_300() ) {
+						$billing_phone = $order->get_billing_phone();
+					} else {
+						$billing_phone = $order->billing_phone;
+					}
+
+					return $is_allowed['customer_phone'] && $billing_phone ? $billing_phone : '';
 				}
 
 				if ( $info == 'customer_shipping_address' ) {
