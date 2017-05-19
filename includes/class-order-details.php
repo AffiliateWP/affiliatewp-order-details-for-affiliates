@@ -31,6 +31,47 @@ class AffiliateWP_Order_Details_For_Affiliates_Order_Details {
 	}
 
 	/**
+	 * Determines if the order attached to the referral actually exists.
+	 *
+	 * @access public
+	 * @since  1.1.3
+	 *
+	 * @param int|\AffWP\Referral $referral Referral object or ID.
+	 * @return bool True if the order exists, otherwise false.
+	 */
+	public function exists( $referral ) {
+		$exists = true;
+
+		switch( $referral->context ) {
+			case 'edd':
+				if ( ! function_exists( 'edd_get_payment' )
+					|| ( function_exists( 'edd_get_payment' ) && ! edd_get_payment( $referral->reference ) )
+				) {
+					$exists = false;
+				}
+
+				break;
+
+			case 'woocommerce':
+				try {
+					$order = new WC_Order( $referral->reference );
+				} catch ( Exception $e ) {
+					if ( method_exists( 'Affiliate_WP_Utilities', 'log' ) ) {
+						affiliate_wp()->utils->log( sprintf( 'Invalid order ID #%1$s for referral #%2$s in the Order Details tab.', $referral->reference, $referral->referral_id ) );
+					}
+
+					esc_html_e( 'No data could be found for the current order.', 'affiliatewp-order-details-for-affiliates' );
+
+					$exists = false;
+				}
+
+				break;
+		}
+
+		return $exists;
+	}
+
+	/**
 	 * Has customer details or order details
 	 *
 	 * @since 1.0.1
