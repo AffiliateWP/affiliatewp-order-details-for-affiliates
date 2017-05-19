@@ -320,6 +320,25 @@ final class AffiliateWP_Order_Details_For_Affiliates {
 
 	    return $links;
 	}
+
+	/**
+	 * Determines whether WooCommerce is version 3.0.0+ or not.
+	 *
+	 * @access public
+	 * @since  1.1.3
+	 *
+	 * @return bool True if WooCommerce 3.0.0+, otherwise false.
+	 */
+	public function woocommerce_is_300() {
+		$wc_is_300 = false;
+
+		if ( function_exists( 'WC' ) && true === version_compare( WC()->version, '3.0.0', '>=' ) ) {
+			$wc_is_300 = true;
+		}
+
+		return $wc_is_300;
+	}
+
 }
 
 /**
