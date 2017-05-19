@@ -55,7 +55,7 @@ OR you can just install it with WordPress by going to Plugins >> Add New >> and 
 
 Then you allow access in one of two ways:
 
-1. Globally enable access for all affiliates. This can be done via the "Allow Global Access To Order Details" checkbox located in Affiliates &rarr; Settings &rarr; Misc.
+1. Globally enable access for all affiliates. This can be done via the "Allow Global Access To Order Details" checkbox located in Affiliates &rarr; Settings &rarr; Integrations.
 2. Enable access on a per-affiliate level. This can be done by editing an affiliate and enabling the "Order Details Access" checkbox located from Affiliates &rarr; Affiliates &rarr; Edit.
 
 Note: When there is global access, the checkbox on the edit affiliate screen is not shown.
