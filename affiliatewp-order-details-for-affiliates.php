@@ -332,7 +332,7 @@ final class AffiliateWP_Order_Details_For_Affiliates {
  * Example: <?php $affiliatewp_order_details_for_affiliates = affiliatewp_order_details_for_affiliates(); ?>
  *
  * @since 1.0
- * @return object The one true AffiliateWP_Order_Details_For_Affiliates Instance
+ * @return \AffiliateWP_Order_Details_For_Affiliates The one true AffiliateWP_Order_Details_For_Affiliates Instance
  */
 function affiliatewp_order_details_for_affiliates() {
     if ( ! class_exists( 'Affiliate_WP' ) ) {
