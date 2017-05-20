@@ -275,11 +275,13 @@ final class AffiliateWP_Order_Details_For_Affiliates {
 	}
 
 	/**
-	 * Can the affiliate access the purchase details?
+	 * Determins if the given user can access the purchase details?
 	 *
-	 * @since 1.0
+	 * @access public
+	 * @since  1.0
 	 *
-	 * @return boolean
+	 * @param int $user_id Optional. User to check for access to purchase details. Default 0 (current user).
+	 * @return bool True if the user can access the purchase details, otherwise false.
 	 */
 	public function can_access_order_details( $user_id = 0 ) {
 
