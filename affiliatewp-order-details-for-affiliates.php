@@ -303,11 +303,12 @@ final class AffiliateWP_Order_Details_For_Affiliates {
 	}
 
 	/**
-	 * Global access for the order details
+	 * Determines if affiliates have been globally granted access to order details.
 	 *
-	 * @since 1.0
+	 * @access public
+	 * @since  1.0
 	 *
-	 * @return boolean
+	 * @return bool True if global access is enabled, otherwise false.
 	 */
 	public function global_order_details_access() {
 		$global_access = affiliate_wp()->settings->get( 'order_details_access' );

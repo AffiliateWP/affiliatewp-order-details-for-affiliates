@@ -28,11 +28,14 @@ class AffiliateWP_Order_Details_For_Affiliates_Emails {
 	}
 
 	/**
-	 * When the referral is complete, send email to the affiliate with the customer details
+	 * When the referral is complete, sends an email to the affiliate with the customer details.
 	 *
-	 * @since 1.0
+	 * @access public
+	 * @since  1.0
 	 *
-	 * @return void
+	 * @param int             $referral_id Referral ID.
+	 * @param \AffWP\Referral $referral    Referral object.
+	 * @param string          $reference   Referral reference (order ID).
 	 */
 	public function complete_referral( $referral_id, $referral, $reference ) {
 
