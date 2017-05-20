@@ -296,10 +296,10 @@ final class AffiliateWP_Order_Details_For_Affiliates {
 		$can_receive = get_user_meta( $user_id, 'affwp_order_details_access', true );
 
 		if ( $can_receive ) {
-			return (bool) true;
+			return true;
 		}
 
-		return (bool) false;
+		return false;
 	}
 
 	/**
@@ -313,10 +313,10 @@ final class AffiliateWP_Order_Details_For_Affiliates {
 		$global_access = affiliate_wp()->settings->get( 'order_details_access' );
 
 		if ( $global_access ) {
-			return (bool) true;
+			return true;
 		}
 
-		return (bool) false;
+		return false;
 	}
 
 	/**
