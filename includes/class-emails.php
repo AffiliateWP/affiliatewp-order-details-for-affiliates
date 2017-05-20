@@ -49,18 +49,28 @@ class AffiliateWP_Order_Details_For_Affiliates_Emails {
 		
 		// get our message
 		$message      = $this->get_email_message( $referral, $affiliate_id );
+		$user_id      = affwp_get_affiliate_user_id( $affiliate_id );
 
-		// only send email to affiliates that are allowed to receive purchase details
-		if ( affiliatewp_order_details_for_affiliates()->can_access_order_details( affwp_get_affiliate_user_id( $affiliate_id ) ) && $this->can_receive_email( $affiliate_id ) ) {
+		// Only send email to affiliates that are allowed to receive purchase details.
+		if ( $this->can_receive_email( $affiliate_id )
+			&& ( affiliatewp_order_details_for_affiliates()->global_order_details_access()
+				|| affiliatewp_order_details_for_affiliates()->can_access_order_details( $user_id )
+			)
+		) {
 
 			// if EDD, use EDD's email class
-			if ( 'edd' == $referral->context ) {
+			if ( 'edd' === $referral->context ) {
+
 				EDD()->emails->send( $email, $subject, $message );
-			}
-			else {
+
+			} else {
+
 				add_filter( 'wp_mail_content_type',  array( $this, 'set_html_content_type' ) );
+
 				affiliate_wp()->emails->send( $email, $subject, $message );
+
 				remove_filter( 'wp_mail_content_type', array( $this, 'set_html_content_type' ) );
+
 			}
 
 		}
