@@ -275,11 +275,13 @@ final class AffiliateWP_Order_Details_For_Affiliates {
 	}
 
 	/**
-	 * Can the affiliate access the purchase details?
+	 * Determins if the given user can access the purchase details?
 	 *
-	 * @since 1.0
+	 * @access public
+	 * @since  1.0
 	 *
-	 * @return boolean
+	 * @param int $user_id Optional. User to check for access to purchase details. Default 0 (current user).
+	 * @return bool True if the user can access the purchase details, otherwise false.
 	 */
 	public function can_access_order_details( $user_id = 0 ) {
 
@@ -294,27 +296,28 @@ final class AffiliateWP_Order_Details_For_Affiliates {
 		$can_receive = get_user_meta( $user_id, 'affwp_order_details_access', true );
 
 		if ( $can_receive ) {
-			return (bool) true;
+			return true;
 		}
 
-		return (bool) false;
+		return false;
 	}
 
 	/**
-	 * Global access for the order details
+	 * Determines if affiliates have been globally granted access to order details.
 	 *
-	 * @since 1.0
+	 * @access public
+	 * @since  1.0
 	 *
-	 * @return boolean
+	 * @return bool True if global access is enabled, otherwise false.
 	 */
 	public function global_order_details_access() {
-		$global_access = affiliate_wp()->settings->get( 'order_details_access' );
+		$global_access = affiliate_wp()->settings->get( 'order_details_access', false );
 
 		if ( $global_access ) {
-			return (bool) true;
+			return true;
 		}
 
-		return (bool) false;
+		return false;
 	}
 
 	/**
