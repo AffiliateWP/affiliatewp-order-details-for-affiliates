@@ -7,7 +7,7 @@
 		array(
 			'affiliate_id' => affwp_get_affiliate_id(), // only get order details from the logged-in affiliate
 			'number'       => -1,						// show all
-			'status'       => 'unpaid'
+			'status'       => array( 'unpaid', 'paid' )
 		)
 	), affwp_get_affiliate_id() );
 ?>

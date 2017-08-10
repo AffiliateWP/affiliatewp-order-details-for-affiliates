@@ -54,6 +54,10 @@ class AffiliateWP_Order_Details_For_Affiliates_Order_Details {
 
 			case 'woocommerce':
 
+				if( ! class_exists( 'WC_Order' ) ) {
+					break;
+				}
+
 				if ( affiliatewp_order_details_for_affiliates()->woocommerce_is_300() ) {
 
 					try {
@@ -149,7 +153,7 @@ class AffiliateWP_Order_Details_For_Affiliates_Order_Details {
 	 * Retrieve specific order information
 	 */
 	public function get( $referral = '', $info = '' ) {
-		
+
 		$is_allowed = $this->allowed();
 
 		switch ( $referral->context ) {
