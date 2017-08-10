@@ -149,7 +149,7 @@ class AffiliateWP_Order_Details_For_Affiliates_Order_Details {
 	 * Retrieve specific order information
 	 */
 	public function get( $referral = '', $info = '' ) {
-		
+
 		$is_allowed = $this->allowed();
 
 		switch ( $referral->context ) {
@@ -159,6 +159,7 @@ class AffiliateWP_Order_Details_For_Affiliates_Order_Details {
 					break;
 				}
 
+				$payment        = new EDD_Payment( $referral->reference );
 				$payment_meta   = edd_get_payment_meta( $referral->reference );
 				$user_info      = edd_get_payment_meta_user_info( $referral->reference );
 
@@ -175,7 +176,7 @@ class AffiliateWP_Order_Details_For_Affiliates_Order_Details {
 				}
 
 				if ( $info == 'customer_name' ) {
-					return $is_allowed['customer_name'] && isset( $user_info['first_name'] ) ? $user_info['first_name'] : '';
+					return $is_allowed['customer_name'] ? $payment->first_name . ' ' . $payment->last_name : '';
 				}
 
 				if ( $info == 'customer_email' ) {
@@ -247,12 +248,12 @@ class AffiliateWP_Order_Details_For_Affiliates_Order_Details {
 
 				if ( $info == 'customer_name' ) {
 					if ( affiliatewp_order_details_for_affiliates()->woocommerce_is_300() ) {
-						$billing_first_name = $order->get_billing_first_name();
+						$name = $order->get_billing_first_name() . ' ' . $order->get_billing_last_name();
 					} else {
-						$billing_first_name = $order->billing_first_name;
+						$name = $order->billing_first_name . ' ' . $order->billing_last_name;;
 					}
 
-					return $is_allowed['customer_name'] && $billing_first_name ? $billing_first_name : '';
+					return $is_allowed['customer_name'] && $name ? $name : '';
 				}
 
 				if ( $info == 'customer_email' ) {
