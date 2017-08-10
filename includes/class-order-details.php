@@ -253,6 +253,10 @@ class AffiliateWP_Order_Details_For_Affiliates_Order_Details {
 					return $is_allowed['order_total'] ? $order->get_formatted_order_total() : '';
 				}
 
+				if ( $info == 'coupon_code' ) {
+					return $is_allowed['coupon_code'] ? implode( ', ', $order->get_used_coupons() ) : '';
+				}
+
 				if ( $info == 'customer_name' ) {
 					if ( affiliatewp_order_details_for_affiliates()->woocommerce_is_300() ) {
 						$billing_first_name = $order->get_billing_first_name();
