@@ -46,6 +46,7 @@
 				$order_date                = $affwp_odfa->order_details->get( $referral, 'order_date' );
 				$order_total               = $affwp_odfa->order_details->get( $referral, 'order_total' );
 				$referral_amount           = $affwp_odfa->order_details->get( $referral, 'referral_amount' );
+				$coupon_code               = $affwp_odfa->order_details->get( $referral, 'coupon_code' );
 				$customer_name             = $affwp_odfa->order_details->get( $referral, 'customer_name' );
 				$customer_email            = $affwp_odfa->order_details->get( $referral, 'customer_email' );
 				$customer_phone            = $affwp_odfa->order_details->get( $referral, 'customer_phone' );
@@ -85,6 +86,13 @@
 						<p>
 							<strong><?php _e( 'Referral Amount:', 'affiliatewp-order-details-for-affiliates' ); ?></strong><br />
 							<?php echo $referral_amount; ?>
+						</p>
+						<?php endif; ?>
+
+						<?php if ( $is_allowed['coupon_code'] && ! empty( $coupon_code ) ) : ?>
+						<p>
+							<strong><?php _e( 'Coupon Code:', 'affiliatewp-order-details-for-affiliates' ); ?></strong><br />
+							<?php echo $coupon_code; ?>
 						</p>
 						<?php endif; ?>
 

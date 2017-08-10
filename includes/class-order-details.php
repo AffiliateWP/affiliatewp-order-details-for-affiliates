@@ -25,6 +25,7 @@ class AffiliateWP_Order_Details_For_Affiliates_Order_Details {
 			'order_total'               => array_key_exists( 'order_total', $disabled ) ? false : true,
 			'order_date'                => array_key_exists( 'order_date', $disabled ) ? false : true,
 			'referral_amount'           => array_key_exists( 'referral_amount', $disabled ) ? false : true,
+			'coupon_code'               => array_key_exists( 'coupon_code', $disabled ) ? false : true,
 		);
 
 		return (array) apply_filters( 'affwp_odfa_allowed_details', $allowed );
@@ -107,6 +108,7 @@ class AffiliateWP_Order_Details_For_Affiliates_Order_Details {
 	 */
 	public function has( $type = '' ) {
 
+		$ret = false;
 		$is_allowed = affiliatewp_order_details_for_affiliates()->order_details->allowed();
 
 		switch ( $type ) {
@@ -121,7 +123,7 @@ class AffiliateWP_Order_Details_For_Affiliates_Order_Details {
 					$is_allowed['customer_billing_address']
 
 				) {
-					return true;
+					$ret = true;
 				}
 
 				break;
@@ -132,24 +134,25 @@ class AffiliateWP_Order_Details_For_Affiliates_Order_Details {
 					$is_allowed['order_number'] ||
 					$is_allowed['order_total'] ||
 					$is_allowed['order_date'] ||
+					$is_allowed['coupon_code'] ||
 					$is_allowed['referral_amount']
 
 				) {
-					return true;
+					$ret = true;
 				}
 
 				break;
 
 		}
 
-		return false;
+		return $ret;
 	}
 
 	/**
 	 * Retrieve specific order information
 	 */
 	public function get( $referral = '', $info = '' ) {
-		
+
 		$is_allowed = $this->allowed();
 
 		switch ( $referral->context ) {
@@ -159,6 +162,7 @@ class AffiliateWP_Order_Details_For_Affiliates_Order_Details {
 					break;
 				}
 
+				$payment        = new EDD_Payment( $referral->reference );
 				$payment_meta   = edd_get_payment_meta( $referral->reference );
 				$user_info      = edd_get_payment_meta_user_info( $referral->reference );
 
@@ -172,6 +176,10 @@ class AffiliateWP_Order_Details_For_Affiliates_Order_Details {
 
 				if ( $info == 'order_total' ) {
 					return $is_allowed['order_total'] ? edd_currency_filter( edd_format_amount( edd_get_payment_amount( $referral->reference ) ) ) : '';
+				}
+
+				if ( $info == 'coupon_code' ) {
+					return $is_allowed['coupon_code'] && 'none' !== $payment->discounts ? $payment->discounts : '';
 				}
 
 				if ( $info == 'customer_name' ) {

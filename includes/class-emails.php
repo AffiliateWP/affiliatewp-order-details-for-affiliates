@@ -46,7 +46,7 @@ class AffiliateWP_Order_Details_For_Affiliates_Emails {
 
 		// email subject
 		$subject      = apply_filters( 'affwp_odfa_email_subject', __( 'The order details for your most recent referral', 'affiliatewp-order-details-for-affiliates' ) );
-		
+
 		// get our message
 		$message      = $this->get_email_message( $referral, $affiliate_id );
 		$user_id      = affwp_get_affiliate_user_id( $affiliate_id );
@@ -74,7 +74,7 @@ class AffiliateWP_Order_Details_For_Affiliates_Emails {
 			}
 
 		}
-		
+
 	}
 
 	/**
@@ -90,11 +90,12 @@ class AffiliateWP_Order_Details_For_Affiliates_Emails {
 		$is_allowed                = $affwp_odfa->order_details->allowed();
 
 		$affiliate_name            = affiliate_wp()->affiliates->get_affiliate_name( $affiliate_id );
-		
+
 		$order_number              = $affwp_odfa->order_details->get( $referral, 'order_number' );
 		$order_date                = $affwp_odfa->order_details->get( $referral, 'order_date' );
 		$order_total               = $affwp_odfa->order_details->get( $referral, 'order_total' );
 		$referral_amount           = $affwp_odfa->order_details->get( $referral, 'referral_amount' );
+		$coupon_code               = $affwp_odfa->order_details->get( $referral, 'coupon_code' );
 		$customer_name             = $affwp_odfa->order_details->get( $referral, 'customer_name' );
 		$customer_email            = $affwp_odfa->order_details->get( $referral, 'customer_email' );
 		$customer_phone            = $affwp_odfa->order_details->get( $referral, 'customer_phone' );
@@ -136,22 +137,29 @@ class AffiliateWP_Order_Details_For_Affiliates_Emails {
 		</p>
 		<?php endif; ?>
 
+		<?php if ( $is_allowed['coupon_code'] && ! empty( $coupon_code ) ) : ?>
+		<p>
+			<strong><?php _e( 'Coupon Code:', 'affiliatewp-order-details-for-affiliates' ); ?></strong><br />
+			<?php echo $coupon_code; ?>
+		</p>
+		<?php endif; ?>
+
 		<?php if ( $is_allowed['customer_name'] && isset( $customer_name ) ) : ?>
 		<p><strong><?php _e( 'Customer Name:', 'affiliatewp-order-details-for-affiliates' ); ?></strong><br /><?php echo $customer_name; ?></p>
 		<?php endif; ?>
 
 		<?php if ( $is_allowed['customer_email'] && isset( $customer_email ) ) : ?>
-		<p>		
+		<p>
 			<strong><?php _e( 'Customer Email:', 'affiliatewp-order-details-for-affiliates' ); ?></strong><br /><?php echo $customer_email; ?>
 		</p>
 		<?php endif; ?>
 
 		<?php if ( $is_allowed['customer_phone'] && isset( $customer_phone ) ) : ?>
-		<p>	
+		<p>
 			<strong><?php _e( 'Customer Phone:', 'affiliatewp-order-details-for-affiliates' ); ?></strong><br /><?php echo $customer_phone; ?>
-		</p>	
+		</p>
 		<?php endif; ?>
-		
+
 		<?php if ( $is_allowed['customer_shipping_address'] && isset( $customer_shipping_address ) ) : ?>
 			<p><strong><?php _e( 'Customer Shipping Address:', 'affiliatewp-order-details-for-affiliates' ); ?></strong><br/> <?php echo $customer_shipping_address; ?></p>
 		<?php endif; ?>

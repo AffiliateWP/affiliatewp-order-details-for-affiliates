@@ -101,6 +101,7 @@ class AffiliateWP_Order_Details_For_Affiliates_Admin {
 				'order_date'                => __( 'Order Date', 'affiliatewp-order-details-for-affiliates' ),
 				'order_total'               => __( 'Order Total', 'affiliatewp-order-details-for-affiliates' ),
 				'referral_amount'           => __( 'Referral Amount', 'affiliatewp-order-details-for-affiliates' ),
+				'coupon_code'               => __( 'Coupon Code Used', 'affiliatewp-order-details-for-affiliates' ),
 				'customer_name'             => __( 'Customer Name', 'affiliatewp-order-details-for-affiliates' ),
 				'customer_email'            => __( 'Customer Email', 'affiliatewp-order-details-for-affiliates' ),
 				'customer_phone'            => __( 'Customer Phone', 'affiliatewp-order-details-for-affiliates' ),
