@@ -2,8 +2,8 @@
 Contributors: sumobi, mordauk, drewapicture
 Tags: AffiliateWP, affiliate, Pippin Williamson, Andrew Munro, mordauk, pippinsplugins, sumobi, ecommerce, e-commerce, e commerce, selling, membership, referrals, marketing
 Requires at least: 3.3
-Tested up to: 4.7.5
-Stable tag: 1.1.3
+Tested up to: 4.8.2
+Stable tag: 1.1.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -73,6 +73,11 @@ See this code snippet: https://gist.github.com/sumobi/5b04d903dcc2eb0dbe0f
 Fix: The [affiliate_order_details] shortcode was not checking to see if the affiliate had access to the order details
 
 == Changelog ==
+
+= 1.1.4 =
+* New: Add zh_TW
+* Show coupon discount codes used on order details
+* Show full customer name
 
 = 1.1.3 =
 * Fix: Avoid a fatal error in WooCommerce 3.0.0+ on the Order Details tab when an order doesn't exist
