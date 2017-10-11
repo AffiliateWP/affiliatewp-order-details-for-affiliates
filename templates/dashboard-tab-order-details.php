@@ -8,7 +8,7 @@ $referrals  = apply_filters( 'affwp_odfa_referral_args', affiliate_wp()->referra
 	array(
 		'affiliate_id' => isset( $affwp_od_atts['affiliate_id'] ) ? $affwp_od_atts['affiliate_id'] : affwp_get_affiliate_id(),
 		'number'       => isset( $affwp_od_atts['number'] ) ? $affwp_od_atts['number'] : 100,
-		'status'       => isset( $affwp_od_atts['status'] ) ? $affwp_od_atts['status'] : 'unpaid'
+		'status'       => isset( $affwp_od_atts['status'] ) ? $affwp_od_atts['status'] : array( 'unpaid', 'paid' )
 	)
 ), affwp_get_affiliate_id() );
 ?>
@@ -47,6 +47,7 @@ $referrals  = apply_filters( 'affwp_odfa_referral_args', affiliate_wp()->referra
 				$order_date                = $affwp_odfa->order_details->get( $referral, 'order_date' );
 				$order_total               = $affwp_odfa->order_details->get( $referral, 'order_total' );
 				$referral_amount           = $affwp_odfa->order_details->get( $referral, 'referral_amount' );
+				$coupon_code               = $affwp_odfa->order_details->get( $referral, 'coupon_code' );
 				$customer_name             = $affwp_odfa->order_details->get( $referral, 'customer_name' );
 				$customer_email            = $affwp_odfa->order_details->get( $referral, 'customer_email' );
 				$customer_phone            = $affwp_odfa->order_details->get( $referral, 'customer_phone' );
@@ -86,6 +87,13 @@ $referrals  = apply_filters( 'affwp_odfa_referral_args', affiliate_wp()->referra
 						<p>
 							<strong><?php _e( 'Referral Amount:', 'affiliatewp-order-details-for-affiliates' ); ?></strong><br />
 							<?php echo $referral_amount; ?>
+						</p>
+						<?php endif; ?>
+
+						<?php if ( $is_allowed['coupon_code'] && ! empty( $coupon_code ) ) : ?>
+						<p>
+							<strong><?php _e( 'Coupon Code:', 'affiliatewp-order-details-for-affiliates' ); ?></strong><br />
+							<?php echo $coupon_code; ?>
 						</p>
 						<?php endif; ?>
 

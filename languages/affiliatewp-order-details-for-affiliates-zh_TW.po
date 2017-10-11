@@ -1,199 +1,238 @@
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: AffiliateWP - Order Details For Affiliates\n"
 "POT-Creation-Date: 2015-10-13 23:09+1300\n"
-"PO-Revision-Date: 2014-09-16 16:55+1200\n"
-"Last-Translator: Andrew Munro, Sumobi <andrew@sumobi.com>\n"
+"PO-Revision-Date: 2017-09-29 21:50+0800\n"
 "Language-Team: AffiliateWP <support@affiliatewp.com>\n"
-"Language: en_US\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.5\n"
+"X-Generator: Poedit 2.0.3\n"
 "X-Poedit-KeywordsList: __;_e\n"
 "X-Poedit-Basepath: .\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "X-Poedit-SourceCharset: UTF-8\n"
+"Last-Translator: \n"
+"Language: zh_TW\n"
 "X-Poedit-SearchPath-0: ..\n"
 
 #: ../affiliatewp-order-details-for-affiliates.php:97
 #: ../affiliatewp-order-details-for-affiliates.php:109
+#, fuzzy
 msgid "Cheatin&#8217; huh?"
-msgstr ""
+msgstr "不準確 ’ 哈?"
 
 #: ../affiliatewp-order-details-for-affiliates.php:237
 #: ../templates/dashboard-tab-order-details.php:17
 #: ../templates/dashboard-tab-order-details.php:26
+#, fuzzy
 msgid "Order Details"
-msgstr ""
+msgstr "商品詳情"
 
 #: ../affiliatewp-order-details-for-affiliates.php:301
+#, fuzzy
 msgid "Get more add-ons for AffiliateWP"
-msgstr ""
+msgstr "为AffiliateWP获取更多附件"
 
 #: ../affiliatewp-order-details-for-affiliates.php:301
+#, fuzzy
 msgid "Get add-ons"
-msgstr ""
+msgstr "取得附加元件 (&G)..."
 
 #: ../includes/class-activation.php:47
+#, fuzzy
 msgid "This plugin"
-msgstr ""
+msgstr "這個插件"
 
 #: ../includes/class-activation.php:90
-#, php-format
+#, fuzzy, php-format
 msgid " requires %sAffiliateWP%s. Please activate it to continue."
-msgstr ""
+msgstr "需要 %s. 请激活它继续。"
 
 #: ../includes/class-activation.php:93
-#, php-format
+#, fuzzy, php-format
 msgid " requires %sAffiliateWP%s. Please install it to continue."
-msgstr ""
+msgstr "需要 %s. 请将其安装以继续。"
 
 #: ../includes/class-admin.php:63
+#, fuzzy
 msgid "Order Details Access"
-msgstr ""
+msgstr "訂單詳情訪問"
 
 #: ../includes/class-admin.php:67
+#, fuzzy
 msgid ""
 "Allow affiliate to see the order details for each referral on their "
 "affiliate dashboard."
-msgstr ""
+msgstr "允許下屬在附屬儀表板上看到每個推介訂單的詳細資訊。"
 
 #: ../includes/class-admin.php:85
+#, fuzzy
 msgid "Order Details for Affiliates"
-msgstr ""
+msgstr "經銷商訂單詳細資訊"
 
 #: ../includes/class-admin.php:90
+#, fuzzy
 msgid "Allow Global Access To Order Details"
-msgstr ""
+msgstr "允許對訂單詳細資訊的全域訪問"
 
 #: ../includes/class-admin.php:91
+#, fuzzy
 msgid ""
 "Check this box if you would like all affiliates to have access to order "
 "details."
-msgstr ""
+msgstr "如果你想要所有的子公司獲得訂單的詳細資訊，請選中此框。"
 
 #: ../includes/class-admin.php:96
+#, fuzzy
 msgid "Disable Details"
-msgstr ""
+msgstr "禁用的细节"
 
 #: ../includes/class-admin.php:97
+#, fuzzy
 msgid "Select which details should not show for an affiliate."
-msgstr ""
+msgstr "選擇哪些細節就不應該顯示為經銷商。"
 
 #: ../includes/class-admin.php:100
+#, fuzzy
 msgid "Order Number"
-msgstr ""
+msgstr "訂單編號"
 
 #: ../includes/class-admin.php:101
+#, fuzzy
 msgid "Order Date"
-msgstr ""
+msgstr "訂購日期"
 
 #: ../includes/class-admin.php:102
+#, fuzzy
 msgid "Order Total"
-msgstr ""
+msgstr "訂單金額"
 
 #: ../includes/class-admin.php:103
+#, fuzzy
 msgid "Referral Amount"
-msgstr ""
+msgstr "推薦獎勵金額"
 
 #: ../includes/class-admin.php:104
+#, fuzzy
 msgid "Customer Name"
-msgstr ""
+msgstr "顧客姓名"
 
 #: ../includes/class-admin.php:105
+#, fuzzy
 msgid "Customer Email"
-msgstr ""
+msgstr "顧客的Email"
 
 #: ../includes/class-admin.php:106
+#, fuzzy
 msgid "Customer Phone"
-msgstr ""
+msgstr "顧客的電話"
 
 #: ../includes/class-admin.php:107
+#, fuzzy
 msgid "Customer Shipping Address"
-msgstr ""
+msgstr "顧客配送地址"
 
 #: ../includes/class-admin.php:108
+#, fuzzy
 msgid "Customer Billing Address"
-msgstr ""
+msgstr "顧客帳單地址"
 
 #: ../includes/class-emails.php:45
+#, fuzzy
 msgid "The order details for your most recent referral"
-msgstr ""
+msgstr "您最近的推薦訂單的詳細資訊"
 
 #: ../includes/class-emails.php:94
+#, fuzzy
 msgid "Hi"
-msgstr ""
+msgstr "您好，"
 
 #: ../includes/class-emails.php:95
+#, fuzzy
 msgid "Here are the order details for your most recent referral:"
-msgstr ""
+msgstr "這裡是您最新的推薦訂單的詳細資訊："
 
 #: ../includes/class-emails.php:100
 #: ../templates/dashboard-tab-order-details.php:60
+#, fuzzy
 msgid "Order Number:"
-msgstr ""
+msgstr "訂單編號"
 
 #: ../includes/class-emails.php:107
 #: ../templates/dashboard-tab-order-details.php:67
+#, fuzzy
 msgid "Order Date:"
-msgstr ""
+msgstr "訂購日期"
 
 #: ../includes/class-emails.php:114
 #: ../templates/dashboard-tab-order-details.php:74
+#, fuzzy
 msgid "Order Total:"
-msgstr ""
+msgstr "訂單總額："
 
 #: ../includes/class-emails.php:121
 #: ../templates/dashboard-tab-order-details.php:81
+#, fuzzy
 msgid "Referral Amount:"
-msgstr ""
+msgstr "推薦獎勵金額"
 
 #: ../includes/class-emails.php:127
+#, fuzzy
 msgid "Customer Name:"
-msgstr ""
+msgstr "顧客姓名"
 
 #: ../includes/class-emails.php:132
+#, fuzzy
 msgid "Customer Email:"
-msgstr ""
+msgstr "顧客的Email"
 
 #: ../includes/class-emails.php:138
+#, fuzzy
 msgid "Customer Phone:"
-msgstr ""
+msgstr "顧客的電話"
 
 #: ../includes/class-emails.php:143
+#, fuzzy
 msgid "Customer Shipping Address:"
-msgstr ""
+msgstr "顧客配送地址"
 
 #: ../includes/class-emails.php:147
+#, fuzzy
 msgid "Customer Billing Address:"
-msgstr ""
+msgstr "顧客帳單地址"
 
 #: ../templates/dashboard-tab-order-details.php:30
+#, fuzzy
 msgid "Customer Information"
-msgstr ""
+msgstr "客戶信息"
 
 #: ../templates/dashboard-tab-order-details.php:95
+#, fuzzy
 msgid "Name:"
-msgstr ""
+msgstr "姓名："
 
 #: ../templates/dashboard-tab-order-details.php:99
+#, fuzzy
 msgid "Email:"
-msgstr ""
+msgstr "Email:"
 
 #: ../templates/dashboard-tab-order-details.php:103
+#, fuzzy
 msgid "Phone:"
-msgstr ""
+msgstr "電話"
 
 #: ../templates/dashboard-tab-order-details.php:108
+#, fuzzy
 msgid "Shipping Address:"
-msgstr ""
+msgstr "訂購人與收件人不同?"
 
 #: ../templates/dashboard-tab-order-details.php:112
+#, fuzzy
 msgid "Billing Address:"
-msgstr ""
+msgstr "帳單地址"
 
 #: ../templates/dashboard-tab-order-details.php:128
+#, fuzzy
 msgid "There are currently no order details to display."
-msgstr ""
+msgstr "目前沒有可顯示的訂單資訊"

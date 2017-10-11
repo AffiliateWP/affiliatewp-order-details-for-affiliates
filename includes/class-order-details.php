@@ -25,6 +25,7 @@ class AffiliateWP_Order_Details_For_Affiliates_Order_Details {
 			'order_total'               => array_key_exists( 'order_total', $disabled ) ? false : true,
 			'order_date'                => array_key_exists( 'order_date', $disabled ) ? false : true,
 			'referral_amount'           => array_key_exists( 'referral_amount', $disabled ) ? false : true,
+			'coupon_code'               => array_key_exists( 'coupon_code', $disabled ) ? false : true,
 		);
 
 		return (array) apply_filters( 'affwp_odfa_allowed_details', $allowed );
@@ -53,6 +54,10 @@ class AffiliateWP_Order_Details_For_Affiliates_Order_Details {
 				break;
 
 			case 'woocommerce':
+
+				if( ! class_exists( 'WC_Order' ) ) {
+					break;
+				}
 
 				if ( affiliatewp_order_details_for_affiliates()->woocommerce_is_300() ) {
 
@@ -107,6 +112,7 @@ class AffiliateWP_Order_Details_For_Affiliates_Order_Details {
 	 */
 	public function has( $type = '' ) {
 
+		$ret = false;
 		$is_allowed = affiliatewp_order_details_for_affiliates()->order_details->allowed();
 
 		switch ( $type ) {
@@ -121,7 +127,7 @@ class AffiliateWP_Order_Details_For_Affiliates_Order_Details {
 					$is_allowed['customer_billing_address']
 
 				) {
-					return true;
+					$ret = true;
 				}
 
 				break;
@@ -132,24 +138,25 @@ class AffiliateWP_Order_Details_For_Affiliates_Order_Details {
 					$is_allowed['order_number'] ||
 					$is_allowed['order_total'] ||
 					$is_allowed['order_date'] ||
+					$is_allowed['coupon_code'] ||
 					$is_allowed['referral_amount']
 
 				) {
-					return true;
+					$ret = true;
 				}
 
 				break;
 
 		}
 
-		return false;
+		return $ret;
 	}
 
 	/**
 	 * Retrieve specific order information
 	 */
 	public function get( $referral = '', $info = '' ) {
-		
+
 		$is_allowed = $this->allowed();
 
 		switch ( $referral->context ) {
@@ -159,6 +166,7 @@ class AffiliateWP_Order_Details_For_Affiliates_Order_Details {
 					break;
 				}
 
+				$payment        = new EDD_Payment( $referral->reference );
 				$payment_meta   = edd_get_payment_meta( $referral->reference );
 				$user_info      = edd_get_payment_meta_user_info( $referral->reference );
 
@@ -174,8 +182,12 @@ class AffiliateWP_Order_Details_For_Affiliates_Order_Details {
 					return $is_allowed['order_total'] ? edd_currency_filter( edd_format_amount( edd_get_payment_amount( $referral->reference ) ) ) : '';
 				}
 
+				if ( $info == 'coupon_code' ) {
+					return $is_allowed['coupon_code'] && 'none' !== $payment->discounts ? $payment->discounts : '';
+				}
+
 				if ( $info == 'customer_name' ) {
-					return $is_allowed['customer_name'] && isset( $user_info['first_name'] ) ? $user_info['first_name'] : '';
+					return $is_allowed['customer_name'] ? $payment->first_name . ' ' . $payment->last_name : '';
 				}
 
 				if ( $info == 'customer_email' ) {
@@ -245,14 +257,18 @@ class AffiliateWP_Order_Details_For_Affiliates_Order_Details {
 					return $is_allowed['order_total'] ? $order->get_formatted_order_total() : '';
 				}
 
+				if ( $info == 'coupon_code' ) {
+					return $is_allowed['coupon_code'] ? implode( ', ', $order->get_used_coupons() ) : '';
+				}
+
 				if ( $info == 'customer_name' ) {
 					if ( affiliatewp_order_details_for_affiliates()->woocommerce_is_300() ) {
-						$billing_first_name = $order->get_billing_first_name();
+						$name = $order->get_billing_first_name() . ' ' . $order->get_billing_last_name();
 					} else {
-						$billing_first_name = $order->billing_first_name;
+						$name = $order->billing_first_name . ' ' . $order->billing_last_name;;
 					}
 
-					return $is_allowed['customer_name'] && $billing_first_name ? $billing_first_name : '';
+					return $is_allowed['customer_name'] && $name ? $name : '';
 				}
 
 				if ( $info == 'customer_email' ) {
