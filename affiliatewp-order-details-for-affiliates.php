@@ -24,7 +24,7 @@
  * @package Order Details For Affiliates
  * @category Core
  * @author AffiliateWP
- * @version 1.1.3
+ * @version 1.1.4
  */
 
 // Exit if accessed directly
@@ -85,7 +85,7 @@ final class AffiliateWP_Order_Details_For_Affiliates {
 
 			self::$plugin_dir = plugin_dir_path( __FILE__ );
 			self::$plugin_url = plugin_dir_url( __FILE__ );
-			self::$version    = '1.1.3';
+			self::$version    = '1.1.4';
 
 			self::$instance->load_textdomain();
 			self::$instance->includes();
