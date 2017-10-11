@@ -55,6 +55,10 @@ class AffiliateWP_Order_Details_For_Affiliates_Order_Details {
 
 			case 'woocommerce':
 
+				if( ! class_exists( 'WC_Order' ) ) {
+					break;
+				}
+
 				if ( affiliatewp_order_details_for_affiliates()->woocommerce_is_300() ) {
 
 					try {
