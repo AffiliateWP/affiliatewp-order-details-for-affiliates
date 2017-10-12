@@ -69,7 +69,9 @@ Note: When there is global access, the checkbox on the edit affiliate screen is 
 * New: The Order Details tab now shows orders where the connected referral is either "paid" or "unpaid" (previously it only showed unpaid)
 * New: Added zh_TW translation
 * New: The coupon code used on the order is now shown in the order details
+* New: The number of orders can now be configured via a new "number" shortcode attribute
 * Tweak: The full customer name is now shown in the order details
+* Fix: Email not sending if "Allow Global Access" is enabled
 
 = 1.1.3 =
 * Fix: Avoid a fatal error in WooCommerce 3.0.0+ on the Order Details tab when an order doesn't exist
