@@ -75,9 +75,10 @@ Fix: The [affiliate_order_details] shortcode was not checking to see if the affi
 == Changelog ==
 
 = 1.1.4 =
-* New: Add zh_TW
-* Show coupon discount codes used on order details
-* Show full customer name
+* New: The Order Details tab now shows orders where the connected referral is either "paid" or "unpaid" (previously it only showed unpaid)
+* New: Add zh_TW translation file
+* New: The coupon code used on the order is now shown in the order details
+* Tweak: The full customer name is now shown in the order details
 
 = 1.1.3 =
 * Fix: Avoid a fatal error in WooCommerce 3.0.0+ on the Order Details tab when an order doesn't exist

@@ -1,16 +1,8 @@
 <?php
-
-global $affwp_od_atts;
-
-$affwp_odfa = affiliatewp_order_details_for_affiliates();
-$is_allowed = $affwp_odfa->order_details->allowed();
-$referrals  = apply_filters( 'affwp_odfa_referral_args', affiliate_wp()->referrals->get_referrals(
-	array(
-		'affiliate_id' => isset( $affwp_od_atts['affiliate_id'] ) ? $affwp_od_atts['affiliate_id'] : affwp_get_affiliate_id(),
-		'number'       => isset( $affwp_od_atts['number'] ) ? $affwp_od_atts['number'] : 100,
-		'status'       => isset( $affwp_od_atts['status'] ) ? $affwp_od_atts['status'] : array( 'unpaid', 'paid' )
-	)
-), affwp_get_affiliate_id() );
+$affwp_odfa    = affiliatewp_order_details_for_affiliates();
+$is_allowed    = $affwp_odfa->order_details->allowed();
+$referral_args = $affwp_odfa->order_details->referral_args();
+$referrals     = affiliate_wp()->referrals->get_referrals( array( 'affiliate_id' => $referral_args['affiliate_id'], 'number' => $referral_args['number'], 'status' => $referral_args['status'] ) );
 ?>
 
 <div id="affwp-affiliate-dashboard-order-details" class="affwp-tab-content">
