@@ -63,7 +63,7 @@ class AffiliateWP_Order_Details_For_Affiliates_Order_Details {
 		}
 
 		// Override the status if added to the [affiliate_order_details] shortcode.
-		if ( isset( $affwp_od_atts['status'] ) ) {
+		if ( ! empty( $affwp_od_atts['status'] ) ) {
 			$args['status'] = explode( ',', $affwp_od_atts['status'] );
 			$args['status'] = array_filter( array_map( 'trim', $args['status']) ); 
 		}
