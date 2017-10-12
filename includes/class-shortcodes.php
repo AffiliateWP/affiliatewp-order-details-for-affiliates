@@ -44,9 +44,9 @@ class AffiliateWP_Order_Details_For_Affiliates_Shortcodes {
 		}
 
         $affwp_od_atts = shortcode_atts( array(
-            'number'       => 100,
-            'affiliate_id' => affwp_get_affiliate_id(),
-            'status'       => array( 'unpaid', 'paid' )
+            'number'       => '',
+            'affiliate_id' => '',
+            'status'       => ''
 
         ), $atts, 'affiliate_order_details' );
 
