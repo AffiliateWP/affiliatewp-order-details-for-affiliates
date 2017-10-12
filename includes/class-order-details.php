@@ -32,6 +32,46 @@ class AffiliateWP_Order_Details_For_Affiliates_Order_Details {
 	}
 
 	/**
+	 * Referral arguments
+	 *
+	 * @since 1.0.4
+	 * 
+	 * @return array $args
+	 */
+	public function referral_args() {
+
+		// Get the shortcode attributes.
+		global $affwp_od_atts;
+
+		// Set up defaults.
+		$args = apply_filters( 'affwp_odfa_referral_args', 
+			array(
+				'affiliate_id' => (int) affwp_get_affiliate_id(),
+				'number'       => 100,
+				'status'       => array( 'unpaid', 'paid' )
+			), affwp_get_affiliate_id()
+		);
+
+		// Override the affiliate ID if added to the [affiliate_order_details] shortcode.
+		if ( ! empty( $affwp_od_atts['affiliate_id'] ) ) {
+			$args['affiliate_id'] = (int) $affwp_od_atts['affiliate_id'];
+		}
+
+		// Override the number of referrals if added to the [affiliate_order_details] shortcode.
+		if ( ! empty( $affwp_od_atts['number'] ) ) {
+			$args['number'] = $affwp_od_atts['number'];
+		}
+
+		// Override the status if added to the [affiliate_order_details] shortcode.
+		if ( isset( $affwp_od_atts['status'] ) ) {
+			$args['status'] = explode( ',', $affwp_od_atts['status'] );
+			$args['status'] = array_filter( array_map( 'trim', $args['status']) ); 
+		}
+
+		return $args;
+	}
+
+	/**
 	 * Determines if the order attached to the referral actually exists.
 	 *
 	 * @access public
