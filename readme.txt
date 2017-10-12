@@ -11,7 +11,7 @@ Allow affiliates to see order details on referrals they generated.
 
 == Description ==
 
-> This plugin requires [AffiliateWP](http://affiliatewp.com/ "AffiliateWP") <strong>It will NOT function without it.</strong>
+> This plugin requires [AffiliateWP](https://affiliatewp.com/ "AffiliateWP") <strong>It will NOT function without it.</strong>
 
 This add-on adds a new area to the affiliate’s dashboard that allows a logged-in affiliate to see specific information about the order that their referral generated. Currently it works with both Easy Digital Downloads and WooCommerce.
 
@@ -30,6 +30,7 @@ The following details can be shown an affiliate who has access:
 1. Order Date
 1. Order Total
 1. Referral Amount
+1. Coupon Code Used
 1. Customer Name
 1. Customer Email
 1. Customer Phone (only available in WooCommerce)
@@ -60,23 +61,13 @@ Then you allow access in one of two ways:
 
 Note: When there is global access, the checkbox on the edit affiliate screen is not shown.
 
-== Frequently Asked Questions ==
-
-= How can I disable certain information that is shown on the affiliate dashboard and email? =
-
-See this code snippet: https://gist.github.com/sumobi/5b04d903dcc2eb0dbe0f
-
 == Screenshots ==
-
-== Upgrade Notice ==
-
-Fix: The [affiliate_order_details] shortcode was not checking to see if the affiliate had access to the order details
 
 == Changelog ==
 
 = 1.1.4 =
 * New: The Order Details tab now shows orders where the connected referral is either "paid" or "unpaid" (previously it only showed unpaid)
-* New: Add zh_TW translation file
+* New: Added zh_TW translation
 * New: The coupon code used on the order is now shown in the order details
 * Tweak: The full customer name is now shown in the order details
 
