@@ -43,7 +43,7 @@ The affiliate will also be emailed these details at the time the referral was cr
 
 **What is AffiliateWP?**
 
-[AffiliateWP](http://affiliatewp.com/ "AffiliateWP") provides a complete affiliate management system for your WordPress website that seamlessly integrates with all major WordPress e-commerce and membership platforms. It aims to provide everything you need in a simple, clean, easy to use system that you will love to use.
+[AffiliateWP](https://affiliatewp.com/ "AffiliateWP") provides a complete affiliate management system for your WordPress website that seamlessly integrates with all major WordPress e-commerce and membership platforms. It aims to provide everything you need in a simple, clean, easy to use system that you will love to use.
 
 == Installation ==
 
@@ -64,6 +64,9 @@ Note: When there is global access, the checkbox on the edit affiliate screen is 
 == Screenshots ==
 
 == Changelog ==
+
+= 1.1.5 =
+* New: The "Order Details" tab now shows within the Affiliate Area Tabs add-on. Affiliate Area Tabs v1.1.6 and AffiliateWP v2.1.7 required.
 
 = 1.1.4 =
 * New: The Order Details tab now shows orders where the connected referral is either "paid" or "unpaid" (previously it only showed unpaid)
