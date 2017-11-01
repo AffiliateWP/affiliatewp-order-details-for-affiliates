@@ -274,12 +274,12 @@ final class AffiliateWP_Order_Details_For_Affiliates {
 			return $tabs;
 		}
 
-		// Register the "Order Details Coupons" tab.
+		// Register the "Order Details" tab.
 		$tabs['order-details'] = __( 'Order Details', 'affiliatewp-order-details-for-affiliates' );
 		
 		// Return the tabs.
 		return $tabs;
-	}	
+	}
 
 	/**
 	 * Add order details tab
