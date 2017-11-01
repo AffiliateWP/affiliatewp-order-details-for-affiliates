@@ -200,9 +200,8 @@ final class AffiliateWP_Order_Details_For_Affiliates {
 		add_filter( 'affwp_template_paths', array( $this, 'get_theme_template_paths' ) );
 
 		// Add to the tabs list for 1.8.1 (fails silently if the hook doesn't exist).
-		add_filter( 'affwp_affiliate_area_tabs', function( $tabs ) {
-			return array_merge( $tabs, array( 'order-details' ) );
-		} );
+		add_filter( 'affwp_affiliate_area_tabs', array( $this, 'register_tab' ), 10, 1 );
+
 	}
 
 	/**
@@ -243,6 +242,46 @@ final class AffiliateWP_Order_Details_For_Affiliates {
 	}
 
 	/**
+	 * Register the "Order Details" tab.
+	 * 
+	 * @since  AffiliateWP 1.8.1
+	 * @since  AffiliateWP 2.1.7 The tab being registered requires both a slug and title.
+	 * 
+	 * @return array $tabs The list of tabs
+	 */
+	public function register_tab( $tabs ) {
+		
+		/**
+		 * User is on older version of AffiliateWP, use the older method of
+		 * registering the tab. 
+		 * 
+		 * The previous method was to register the slug, and add the tab
+		 * separately, @see add_tab()
+		 * 
+		 * @since 1.1.5
+		 */
+		if ( ! $this->has_2_1_7() ) {
+			return array_merge( $tabs, array( 'order-details' ) );
+		}
+
+		/**
+		 * Don't show tab to affiliate if they don't have access.
+		 * Also makes sure tab is properly outputted in Affiliate Area Tabs.
+		 * 
+		 * @since 1.1.5
+		 */
+		if ( ! ( $this->can_access_order_details() || $this->global_order_details_access() ) ) {
+			return $tabs;
+		}
+
+		// Register the "Order Details Coupons" tab.
+		$tabs['order-details'] = __( 'Order Details', 'affiliatewp-order-details-for-affiliates' );
+		
+		// Return the tabs.
+		return $tabs;
+	}	
+
+	/**
 	 * Add order details tab
 	 *
 	 * @since 1.0
@@ -250,15 +289,39 @@ final class AffiliateWP_Order_Details_For_Affiliates {
 	 * @return void
 	 */
 	public function add_order_details_tab( $affiliate_id, $active_tab ) {
+
+		// Return early if user has AffiliateWP 2.1.7 or newer. This method is no longer needed.
+		if ( $this->has_2_1_7() ) {
+			return;
+		}
+
 		if ( ! ( $this->can_access_order_details() || $this->global_order_details_access() ) ) {
 			return;
 		}
 
 		?>
 		<li class="affwp-affiliate-dashboard-tab<?php echo $active_tab == 'order-details' ? ' active' : ''; ?>">
-			<a href="<?php echo esc_url( add_query_arg( 'tab', 'order-details' ) ); ?>"><?php _e( 'Order Details', 'affiliate-wp' ); ?></a>
+			<a href="<?php echo esc_url( add_query_arg( 'tab', 'order-details' ) ); ?>"><?php _e( 'Order Details', 'affiliatewp-order-details-for-affiliates' ); ?></a>
 		</li>
 	<?php
+	}
+
+	/**
+	 * Determine if the user has at least version 2.1.7 of AffiliateWP.
+	 *
+	 * @since 1.1.5
+	 * 
+	 * @return boolean True if AffiliateWP v2.1.7 or newer, false otherwise.
+	 */
+	public function has_2_1_7() {
+
+		$return = true;
+
+		if ( version_compare( AFFILIATEWP_VERSION, '2.1.7', '<' ) ) {
+			$return = false;
+		}
+
+		return $return;
 	}
 
 	/**
