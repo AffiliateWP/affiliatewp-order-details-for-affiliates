@@ -5,7 +5,7 @@
  * Description: Share customer purchase information with the affiliate who referred them.
  * Author: AffiliateWP
  * Author URI: https://affiliatewp.com
- * Version: 1.1.4
+ * Version: 1.1.5
  * Text Domain: affiliatewp-order-details-for-affiliates
  * Domain Path: languages
  *
@@ -24,7 +24,7 @@
  * @package Order Details For Affiliates
  * @category Core
  * @author AffiliateWP
- * @version 1.1.4
+ * @version 1.1.5
  */
 
 // Exit if accessed directly
