@@ -2,8 +2,8 @@
 Contributors: sumobi, mordauk, drewapicture
 Tags: AffiliateWP, affiliate, Pippin Williamson, Andrew Munro, mordauk, pippinsplugins, sumobi, ecommerce, e-commerce, e commerce, selling, membership, referrals, marketing
 Requires at least: 3.3
-Tested up to: 4.8.2
-Stable tag: 1.1.4
+Tested up to: 4.8.3
+Stable tag: 1.1.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -11,7 +11,7 @@ Allow affiliates to see order details on referrals they generated.
 
 == Description ==
 
-> This plugin requires [AffiliateWP](http://affiliatewp.com/ "AffiliateWP") <strong>It will NOT function without it.</strong>
+> This plugin requires [AffiliateWP](https://affiliatewp.com/ "AffiliateWP") <strong>It will NOT function without it.</strong>
 
 This add-on adds a new area to the affiliate’s dashboard that allows a logged-in affiliate to see specific information about the order that their referral generated. Currently it works with both Easy Digital Downloads and WooCommerce.
 
@@ -30,6 +30,7 @@ The following details can be shown an affiliate who has access:
 1. Order Date
 1. Order Total
 1. Referral Amount
+1. Coupon Code Used
 1. Customer Name
 1. Customer Email
 1. Customer Phone (only available in WooCommerce)
@@ -42,7 +43,7 @@ The affiliate will also be emailed these details at the time the referral was cr
 
 **What is AffiliateWP?**
 
-[AffiliateWP](http://affiliatewp.com/ "AffiliateWP") provides a complete affiliate management system for your WordPress website that seamlessly integrates with all major WordPress e-commerce and membership platforms. It aims to provide everything you need in a simple, clean, easy to use system that you will love to use.
+[AffiliateWP](https://affiliatewp.com/ "AffiliateWP") provides a complete affiliate management system for your WordPress website that seamlessly integrates with all major WordPress e-commerce and membership platforms. It aims to provide everything you need in a simple, clean, easy to use system that you will love to use.
 
 == Installation ==
 
@@ -60,24 +61,20 @@ Then you allow access in one of two ways:
 
 Note: When there is global access, the checkbox on the edit affiliate screen is not shown.
 
-== Frequently Asked Questions ==
-
-= How can I disable certain information that is shown on the affiliate dashboard and email? =
-
-See this code snippet: https://gist.github.com/sumobi/5b04d903dcc2eb0dbe0f
-
 == Screenshots ==
-
-== Upgrade Notice ==
-
-Fix: The [affiliate_order_details] shortcode was not checking to see if the affiliate had access to the order details
 
 == Changelog ==
 
+= 1.1.5 =
+* New: The "Order Details" tab now shows within the Affiliate Area Tabs add-on. Affiliate Area Tabs v1.1.6 and AffiliateWP v2.1.7 required.
+
 = 1.1.4 =
-* New: Add zh_TW
-* Show coupon discount codes used on order details
-* Show full customer name
+* New: The Order Details tab now shows orders where the connected referral is either "paid" or "unpaid" (previously it only showed unpaid)
+* New: Added zh_TW translation
+* New: The coupon code used on the order is now shown in the order details
+* New: The number of orders can now be configured via a new "number" shortcode attribute
+* Tweak: The full customer name is now shown in the order details
+* Fix: Email not sending if "Allow Global Access" is enabled
 
 = 1.1.3 =
 * Fix: Avoid a fatal error in WooCommerce 3.0.0+ on the Order Details tab when an order doesn't exist
