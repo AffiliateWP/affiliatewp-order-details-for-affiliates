@@ -33,6 +33,8 @@ class AffiliateWP_Order_Details_For_Affiliates_Shortcodes {
     */
     public function affiliate_order_details( $atts, $content = null ) {
 
+        global $affwp_od_atts;
+
     	if ( ! ( affwp_is_affiliate() && affwp_is_active_affiliate() ) ) {
     		return;
     	}
@@ -40,6 +42,13 @@ class AffiliateWP_Order_Details_For_Affiliates_Shortcodes {
 		if ( ! ( affiliatewp_order_details_for_affiliates()->can_access_order_details() || affiliatewp_order_details_for_affiliates()->global_order_details_access() ) ) {
 			return;
 		}
+
+        $affwp_od_atts = shortcode_atts( array(
+            'number'       => '',
+            'affiliate_id' => '',
+            'status'       => ''
+
+        ), $atts, 'affiliate_order_details' );
 
     	ob_start();
 
