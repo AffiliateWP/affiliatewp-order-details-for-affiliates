@@ -3,8 +3,8 @@
  * Plugin Name: AffiliateWP - Order Details For Affiliates
  * Plugin URI: https://affiliatewp.com/addons/order-details-affiliates/
  * Description: Share customer purchase information with the affiliate who referred them.
- * Author: AffiliateWP
- * Author URI: https://affiliatewp.com
+ * Author: Sandhills Development, LLC
+ * Author URI: https://sandhillsdev.com
  * Version: 1.1.5
  * Text Domain: affiliatewp-order-details-for-affiliates
  * Domain Path: languages
