@@ -123,6 +123,10 @@ class AffiliateWP_Order_Details_For_Affiliates_Order_Details {
 				}
 
 				break;
+
+			default:
+				$exists = false;
+				break;
 		}
 
 		return $exists;
@@ -339,6 +343,10 @@ class AffiliateWP_Order_Details_For_Affiliates_Order_Details {
 					return $is_allowed['customer_billing_address'] && $order->get_formatted_billing_address() ? $order->get_formatted_billing_address() : '';
 				}
 
+				break;
+
+			default:
+				return '';
 				break;
 		}
 
