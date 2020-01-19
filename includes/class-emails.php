@@ -82,9 +82,10 @@ class AffiliateWP_Order_Details_For_Affiliates_Emails {
 	 *
 	 * @since 1.0
 	 *
+	 * @param \AffWP\Referral $referral Referral object.
 	 * @return void
 	 */
-	public function get_email_message( $referral = array(), $affiliate_id = 0 ) {
+	public function get_email_message( $referral, $affiliate_id = 0 ) {
 
 		$affwp_odfa                = affiliatewp_order_details_for_affiliates();
 		$is_allowed                = $affwp_odfa->order_details->allowed();

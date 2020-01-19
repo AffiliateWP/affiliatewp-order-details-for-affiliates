@@ -77,7 +77,7 @@ class AffiliateWP_Order_Details_For_Affiliates_Order_Details {
 	 * @access public
 	 * @since  1.1.3
 	 *
-	 * @param int|\AffWP\Referral $referral Referral object or ID.
+	 * @param \AffWP\Referral $referral Referral object.
 	 * @return bool True if the order exists, otherwise false.
 	 */
 	public function exists( $referral ) {
@@ -198,8 +198,12 @@ class AffiliateWP_Order_Details_For_Affiliates_Order_Details {
 
 	/**
 	 * Retrieve specific order information
+	 *
+	 * @since 1.0
+	 *
+	 * @param \AffWP\Referral $referral Referral object.
 	 */
-	public function get( $referral = '', $info = '' ) {
+	public function get( $referral, $info = '' ) {
 
 		$is_allowed = $this->allowed();
 
