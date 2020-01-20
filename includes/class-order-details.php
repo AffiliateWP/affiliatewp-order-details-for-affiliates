@@ -77,7 +77,7 @@ class AffiliateWP_Order_Details_For_Affiliates_Order_Details {
 	 * @access public
 	 * @since  1.1.3
 	 *
-	 * @param int|\AffWP\Referral $referral Referral object or ID.
+	 * @param \AffWP\Referral $referral Referral object.
 	 * @return bool True if the order exists, otherwise false.
 	 */
 	public function exists( $referral ) {
@@ -122,6 +122,10 @@ class AffiliateWP_Order_Details_For_Affiliates_Order_Details {
 
 				}
 
+				break;
+
+			default:
+				$exists = false;
 				break;
 		}
 
@@ -194,8 +198,12 @@ class AffiliateWP_Order_Details_For_Affiliates_Order_Details {
 
 	/**
 	 * Retrieve specific order information
+	 *
+	 * @since 1.0
+	 *
+	 * @param \AffWP\Referral $referral Referral object.
 	 */
-	public function get( $referral = '', $info = '' ) {
+	public function get( $referral, $info = '' ) {
 
 		$is_allowed = $this->allowed();
 
@@ -237,7 +245,7 @@ class AffiliateWP_Order_Details_For_Affiliates_Order_Details {
 				if ( $info == 'customer_address' ) {
 					//return $is_allowed['customer_email'] && isset( $user_info['email'] ) ? $user_info['email'] : '';
 
-					$address = ! empty( $user_info['address'] ) ? $user_info['address'] : '';
+					$address = ! empty( $user_info['address'] ) ? $user_info['address'] : array();
 
 					if ( $is_allowed['customer_address'] && ! empty( $address ) ) {
 						$customer_address = $address['line1'] . '<br />';
@@ -339,6 +347,10 @@ class AffiliateWP_Order_Details_For_Affiliates_Order_Details {
 					return $is_allowed['customer_billing_address'] && $order->get_formatted_billing_address() ? $order->get_formatted_billing_address() : '';
 				}
 
+				break;
+
+			default:
+				return '';
 				break;
 		}
 
