@@ -245,7 +245,7 @@ class AffiliateWP_Order_Details_For_Affiliates_Order_Details {
 				if ( $info == 'customer_address' ) {
 					//return $is_allowed['customer_email'] && isset( $user_info['email'] ) ? $user_info['email'] : '';
 
-					$address = ! empty( $user_info['address'] ) ? $user_info['address'] : '';
+					$address = ! empty( $user_info['address'] ) ? $user_info['address'] : array();
 
 					if ( $is_allowed['customer_address'] && ! empty( $address ) ) {
 						$customer_address = $address['line1'] . '<br />';
