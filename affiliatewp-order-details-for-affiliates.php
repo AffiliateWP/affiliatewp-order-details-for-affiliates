@@ -7,7 +7,6 @@
  * Author URI: https://sandhillsdev.com
  * Version: 1.1.5
  * Text Domain: affiliatewp-order-details-for-affiliates
- * Domain Path: languages
  *
  * AffiliateWP is distributed under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 2 of the License, or
@@ -87,7 +86,6 @@ final class AffiliateWP_Order_Details_For_Affiliates {
 			self::$plugin_url = plugin_dir_url( __FILE__ );
 			self::$version    = '1.1.5';
 
-			self::$instance->load_textdomain();
 			self::$instance->includes();
 			self::$instance->hooks();
 
@@ -124,39 +122,6 @@ final class AffiliateWP_Order_Details_For_Affiliates {
 	public function __wakeup() {
 		// Unserializing instances of the class is forbidden
 		_doing_it_wrong( __FUNCTION__, __( 'Cheatin&#8217; huh?', 'affiliatewp-order-details-for-affiliates' ), '1.0' );
-	}
-
-	/**
-	 * Loads the plugin language files
-	 *
-	 * @access public
-	 * @since 1.0
-	 * @return void
-	 */
-	public function load_textdomain() {
-
-		// Set filter for plugin's languages directory
-		$lang_dir = dirname( plugin_basename( __FILE__ ) ) . '/languages/';
-		$lang_dir = apply_filters( 'affwp_odfa_languages_directory', $lang_dir );
-
-		// Traditional WordPress plugin locale filter
-		$locale   = apply_filters( 'plugin_locale',  get_locale(), 'affiliatewp-order-details-for-affiliates' );
-		$mofile   = sprintf( '%1$s-%2$s.mo', 'affiliatewp-order-details-for-affiliates', $locale );
-
-		// Setup paths to current locale file
-		$mofile_local  = $lang_dir . $mofile;
-		$mofile_global = WP_LANG_DIR . '/affiliatewp-order-details-for-affiliates/' . $mofile;
-
-		if ( file_exists( $mofile_global ) ) {
-			// Look in global /wp-content/languages/affiliatewp-order-details-for-affiliates/ folder
-			load_textdomain( 'affiliatewp-order-details-for-affiliates', $mofile_global );
-		} elseif ( file_exists( $mofile_local ) ) {
-			// Look in local /wp-content/plugins/affiliatewp-order-details-for-affiliates/languages/ folder
-			load_textdomain( 'affiliatewp-order-details-for-affiliates', $mofile_local );
-		} else {
-			// Load the default language files
-			load_plugin_textdomain( 'affiliatewp-order-details-for-affiliates', false, $lang_dir );
-		}
 	}
 
 	/**
