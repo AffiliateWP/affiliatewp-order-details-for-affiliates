@@ -306,7 +306,12 @@ class AffiliateWP_Order_Details_For_Affiliates_Order_Details {
 				}
 
 				if ( $info == 'coupon_code' ) {
-					return $is_allowed['coupon_code'] ? implode( ', ', $order->get_used_coupons() ) : '';
+					if ( version_compare( WC()->version, '3.7.0', '>=' ) ) {
+						$coupons = $order->get_coupon_codes();
+					} else {
+						$coupons = $order->get_used_coupons();
+					}
+					return $is_allowed['coupon_code'] ? implode( ', ', $coupons ) : '';
 				}
 
 				if ( $info == 'customer_name' ) {
