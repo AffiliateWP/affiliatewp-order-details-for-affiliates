@@ -273,21 +273,12 @@ class AffiliateWP_Order_Details_For_Affiliates_Order_Details {
 				if ( $info == 'order_number' ) {
 
 					if ( affiliatewp_order_details_for_affiliates()->woocommerce_is_300() ) {
-						$order_id = $order->get_id();
+						$order_id = $order->get_order_number();
 					} else {
 						$order_id = $order->id;
 					}
 
-					$seq_order_number = get_post_meta( $order_id, '_order_number', true );
-
-					// sequential order numbers compatibility
-					if ( $seq_order_number && class_exists( 'WC_Seq_Order_Number_Pro' ) ) {
-						$order_number = $seq_order_number;
-					} else {
-						$order_number = $referral->reference;
-					}
-
-					return $is_allowed['order_number'] ? $order_number : '';
+					return $is_allowed['order_number'] ? $order_id : '';
 
 				}
 
