@@ -4,7 +4,7 @@ Tags: AffiliateWP, affiliate, Pippin Williamson, Andrew Munro, mordauk, pippinsp
 Requires at least: 4.6
 Tested up to: 5.6
 Requires PHP: 5.3
-Stable tag: 1.1.5
+Stable tag: 1.1.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -65,6 +65,15 @@ Note: When there is global access, the checkbox on the edit affiliate screen is 
 == Screenshots ==
 
 == Changelog ==
+
+= 1.1.6 =
+* New: Add Polish translations
+* Improved: Allow language translations to be handled by WP repo
+* Improved: Update the Tested up to WordPress version
+* Fixed: Adjust how used coupon codes are retrieved in WooCommerce 3.7+
+* Fixed: Restore support for WooCommerce sequential order numbers
+* Fixed: Referrals with no context breaking output of page
+* Dev: Improve inline documentation throughout
 
 = 1.1.5 =
 * New: The "Order Details" tab now shows within the Affiliate Area Tabs add-on. Affiliate Area Tabs v1.1.6 and AffiliateWP v2.1.7 required.

@@ -5,7 +5,7 @@
  * Description: Share customer purchase information with the affiliate who referred them.
  * Author: Sandhills Development, LLC
  * Author URI: https://sandhillsdev.com
- * Version: 1.1.5
+ * Version: 1.1.6
  * Text Domain: affiliatewp-order-details-for-affiliates
  *
  * AffiliateWP is distributed under the terms of the GNU General Public License as published by
@@ -23,7 +23,7 @@
  * @package Order Details For Affiliates
  * @category Core
  * @author AffiliateWP
- * @version 1.1.5
+ * @version 1.1.6
  */
 
 // Exit if accessed directly.
@@ -108,7 +108,7 @@ final class AffiliateWP_Order_Details_For_Affiliates {
 
 			self::$plugin_dir = plugin_dir_path( __FILE__ );
 			self::$plugin_url = plugin_dir_url( __FILE__ );
-			self::$version    = '1.1.5';
+			self::$version    = '1.1.6';
 
 			self::$instance->includes();
 			self::$instance->hooks();
