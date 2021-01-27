@@ -1,6 +1,8 @@
 <?php
 /**
  * Order Details class
+ *
+ * @since 1.0.0
  */
 class AffiliateWP_Order_Details_For_Affiliates_Order_Details {
 
@@ -8,7 +10,7 @@ class AffiliateWP_Order_Details_For_Affiliates_Order_Details {
 	 * Allowed order details
 	 *
 	 * @since 1.0
-	 * @return  array allowed order details
+	 * @return array allowed order details.
 	 */
 	public function allowed() {
 
@@ -35,7 +37,7 @@ class AffiliateWP_Order_Details_For_Affiliates_Order_Details {
 	 * Referral arguments
 	 *
 	 * @since 1.0.4
-	 * 
+	 *
 	 * @return array $args
 	 */
 	public function referral_args() {
@@ -44,12 +46,25 @@ class AffiliateWP_Order_Details_For_Affiliates_Order_Details {
 		global $affwp_od_atts;
 
 		// Set up defaults.
-		$args = apply_filters( 'affwp_odfa_referral_args', 
+		/**
+		 * Filters the arguments passed to get_referrals() to populate the order details table.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array $args         Arguments passed to get_referrals().
+		 * @param int   $affiliate_id Affiliate ID.
+		 */
+		$args = apply_filters(
+			'affwp_odfa_referral_args',
 			array(
 				'affiliate_id' => (int) affwp_get_affiliate_id(),
 				'number'       => 100,
-				'status'       => array( 'unpaid', 'paid' )
-			), affwp_get_affiliate_id()
+				'status'       => array(
+					'unpaid',
+					'paid',
+				),
+			),
+			affwp_get_affiliate_id()
 		);
 
 		// Override the affiliate ID if added to the [affiliate_order_details] shortcode.
@@ -65,7 +80,7 @@ class AffiliateWP_Order_Details_For_Affiliates_Order_Details {
 		// Override the status if added to the [affiliate_order_details] shortcode.
 		if ( ! empty( $affwp_od_atts['status'] ) ) {
 			$args['status'] = explode( ',', $affwp_od_atts['status'] );
-			$args['status'] = array_filter( array_map( 'trim', $args['status']) ); 
+			$args['status'] = array_filter( array_map( 'trim', $args['status'] ) );
 		}
 
 		return $args;
@@ -74,7 +89,6 @@ class AffiliateWP_Order_Details_For_Affiliates_Order_Details {
 	/**
 	 * Determines if the order attached to the referral actually exists.
 	 *
-	 * @access public
 	 * @since  1.1.3
 	 *
 	 * @param \AffWP\Referral $referral Referral object.
@@ -83,7 +97,7 @@ class AffiliateWP_Order_Details_For_Affiliates_Order_Details {
 	public function exists( $referral ) {
 		$exists = true;
 
-		switch( $referral->context ) {
+		switch ( $referral->context ) {
 			case 'edd':
 				if ( ! function_exists( 'edd_get_payment' )
 					|| ( function_exists( 'edd_get_payment' ) && ! edd_get_payment( $referral->reference ) )
@@ -94,8 +108,7 @@ class AffiliateWP_Order_Details_For_Affiliates_Order_Details {
 				break;
 
 			case 'woocommerce':
-
-				if( ! class_exists( 'WC_Order' ) ) {
+				if ( ! class_exists( 'WC_Order' ) ) {
 					break;
 				}
 
@@ -109,7 +122,6 @@ class AffiliateWP_Order_Details_For_Affiliates_Order_Details {
 
 						$exists = false;
 					}
-
 				} else {
 
 					$order = new WC_Order( $referral->reference );
@@ -119,7 +131,6 @@ class AffiliateWP_Order_Details_For_Affiliates_Order_Details {
 
 						$exists = false;
 					}
-
 				}
 
 				break;
@@ -135,7 +146,6 @@ class AffiliateWP_Order_Details_For_Affiliates_Order_Details {
 	/**
 	 * Handles messaging/logging output in the event of a WooCommerce order error on retrieval.
 	 *
-	 * @access private
 	 * @since  1.1.3
 	 *
 	 * @param \AffWP\Referral $referral Referral object.
@@ -149,20 +159,21 @@ class AffiliateWP_Order_Details_For_Affiliates_Order_Details {
 	}
 
 	/**
-	 * Has customer details or order details
+	 * Has customer details or order details.
 	 *
 	 * @since 1.0.1
-	 * @return boolean
+	 *
+	 * @param string $type Optional. Details type. Default ''.
+	 * @return boolean Has that details type.
 	 */
 	public function has( $type = '' ) {
 
-		$ret = false;
+		$ret        = false;
 		$is_allowed = affiliatewp_order_details_for_affiliates()->order_details->allowed();
 
 		switch ( $type ) {
 
 			case 'customer_details':
-
 				if (
 					$is_allowed['customer_name'] ||
 					$is_allowed['customer_email'] ||
@@ -177,7 +188,6 @@ class AffiliateWP_Order_Details_For_Affiliates_Order_Details {
 				break;
 
 			case 'order_details':
-
 				if (
 					$is_allowed['order_number'] ||
 					$is_allowed['order_total'] ||
@@ -202,6 +212,7 @@ class AffiliateWP_Order_Details_For_Affiliates_Order_Details {
 	 * @since 1.0
 	 *
 	 * @param \AffWP\Referral $referral Referral object.
+	 * @param string          $info Optional. Info type. Default ''.
 	 */
 	public function get( $referral, $info = '' ) {
 
@@ -214,41 +225,41 @@ class AffiliateWP_Order_Details_For_Affiliates_Order_Details {
 					break;
 				}
 
-				$payment        = new EDD_Payment( $referral->reference );
-				$payment_meta   = edd_get_payment_meta( $referral->reference );
-				$user_info      = edd_get_payment_meta_user_info( $referral->reference );
+				$payment      = new EDD_Payment( $referral->reference );
+				$payment_meta = edd_get_payment_meta( $referral->reference );
+				$user_info    = edd_get_payment_meta_user_info( $referral->reference );
 
-				if ( $info == 'order_number' ) {
+				if ( 'order_number' === $info ) {
 					return $is_allowed['order_number'] ? $referral->reference : '';
 				}
 
-				if ( $info == 'order_date' ) {
+				if ( 'order_date' === $info ) {
 					return $is_allowed['order_date'] ? $payment_meta['date'] : '';
 				}
 
-				if ( $info == 'order_total' ) {
+				if ( 'order_total' === $info ) {
 					return $is_allowed['order_total'] ? edd_currency_filter( edd_format_amount( edd_get_payment_amount( $referral->reference ) ) ) : '';
 				}
 
-				if ( $info == 'coupon_code' ) {
+				if ( 'coupon_code' === $info ) {
 					return $is_allowed['coupon_code'] && 'none' !== $payment->discounts ? $payment->discounts : '';
 				}
 
-				if ( $info == 'customer_name' ) {
+				if ( 'customer_name' === $info ) {
 					return $is_allowed['customer_name'] ? $payment->first_name . ' ' . $payment->last_name : '';
 				}
 
-				if ( $info == 'customer_email' ) {
+				if ( 'customer_email' === $info ) {
 					return $is_allowed['customer_email'] && isset( $user_info['email'] ) ? $user_info['email'] : '';
 				}
 
-				if ( $info == 'customer_address' ) {
-					//return $is_allowed['customer_email'] && isset( $user_info['email'] ) ? $user_info['email'] : '';
+				if ( 'customer_address' === $info ) {
+					// return $is_allowed['customer_email'] && isset( $user_info['email'] ) ? $user_info['email'] : '';
 
 					$address = ! empty( $user_info['address'] ) ? $user_info['address'] : array();
 
 					if ( $is_allowed['customer_address'] && ! empty( $address ) ) {
-						$customer_address = $address['line1'] . '<br />';
+						$customer_address  = $address['line1'] . '<br />';
 						$customer_address .= $address['line2'] . '<br />';
 						$customer_address .= $address['city'] . '<br />';
 						$customer_address .= $address['zip'] . '<br />';
@@ -263,15 +274,13 @@ class AffiliateWP_Order_Details_For_Affiliates_Order_Details {
 				break;
 
 			case 'woocommerce':
-
 				if ( ! class_exists( 'WC_Order' ) ) {
 					break;
 				}
 
 				$order = new WC_Order( $referral->reference );
 
-				if ( $info == 'order_number' ) {
-
+				if ( 'order_number' === $info ) {
 					if ( affiliatewp_order_details_for_affiliates()->woocommerce_is_300() ) {
 						$order_id = $order->get_order_number();
 					} else {
@@ -282,7 +291,7 @@ class AffiliateWP_Order_Details_For_Affiliates_Order_Details {
 
 				}
 
-				if ( $info == 'order_date' ) {
+				if ( 'order_date' === $info ) {
 					if ( affiliatewp_order_details_for_affiliates()->woocommerce_is_300() ) {
 						$order_date = $order->get_date_created();
 					} else {
@@ -292,11 +301,11 @@ class AffiliateWP_Order_Details_For_Affiliates_Order_Details {
 					return $is_allowed['order_date'] ? $order_date : '';
 				}
 
-				if ( $info == 'order_total' ) {
+				if ( 'order_total' === $info ) {
 					return $is_allowed['order_total'] ? $order->get_formatted_order_total() : '';
 				}
 
-				if ( $info == 'coupon_code' ) {
+				if ( 'coupon_code' === $info ) {
 					if ( version_compare( WC()->version, '3.7.0', '>=' ) ) {
 						$coupons = $order->get_coupon_codes();
 					} else {
@@ -305,17 +314,17 @@ class AffiliateWP_Order_Details_For_Affiliates_Order_Details {
 					return $is_allowed['coupon_code'] ? implode( ', ', $coupons ) : '';
 				}
 
-				if ( $info == 'customer_name' ) {
+				if ( 'customer_name' === $info ) {
 					if ( affiliatewp_order_details_for_affiliates()->woocommerce_is_300() ) {
 						$name = $order->get_billing_first_name() . ' ' . $order->get_billing_last_name();
 					} else {
-						$name = $order->billing_first_name . ' ' . $order->billing_last_name;;
+						$name = $order->billing_first_name . ' ' . $order->billing_last_name;
 					}
 
 					return $is_allowed['customer_name'] && $name ? $name : '';
 				}
 
-				if ( $info == 'customer_email' ) {
+				if ( 'customer_email' === $info ) {
 					if ( affiliatewp_order_details_for_affiliates()->woocommerce_is_300() ) {
 						$billing_email = $order->get_billing_email();
 					} else {
@@ -325,7 +334,7 @@ class AffiliateWP_Order_Details_For_Affiliates_Order_Details {
 					return $is_allowed['customer_email'] && $billing_email ? $billing_email : '';
 				}
 
-				if ( $info == 'customer_phone' ) {
+				if ( 'customer_phone' === $info ) {
 					if ( affiliatewp_order_details_for_affiliates()->woocommerce_is_300() ) {
 						$billing_phone = $order->get_billing_phone();
 					} else {
@@ -335,11 +344,11 @@ class AffiliateWP_Order_Details_For_Affiliates_Order_Details {
 					return $is_allowed['customer_phone'] && $billing_phone ? $billing_phone : '';
 				}
 
-				if ( $info == 'customer_shipping_address' ) {
+				if ( 'customer_shipping_address' === $info ) {
 					return $is_allowed['customer_shipping_address'] && $order->get_formatted_shipping_address() ? $order->get_formatted_shipping_address() : '';
 				}
 
-				if ( $info == 'customer_billing_address' ) {
+				if ( 'customer_billing_address' === $info ) {
 					return $is_allowed['customer_billing_address'] && $order->get_formatted_billing_address() ? $order->get_formatted_billing_address() : '';
 				}
 
@@ -347,15 +356,13 @@ class AffiliateWP_Order_Details_For_Affiliates_Order_Details {
 
 			default:
 				return '';
-				break;
 		}
 
-		if ( $info == 'referral_amount' ) {
+		if ( 'referral_amount' === $info ) {
 			return $is_allowed['referral_amount'] ? affwp_currency_filter( $referral->amount ) : '';
 		}
 
 		do_action( 'affwp_odfa_order_details', $referral, $info );
 	}
-
 
 }

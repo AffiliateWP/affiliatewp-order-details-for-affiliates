@@ -26,57 +26,81 @@
  * @version 1.1.5
  */
 
-// Exit if accessed directly
-if ( ! defined( 'ABSPATH' ) ) exit;
-
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+/**
+ * Main AffiliateWP_Order_Details_For_Affiliates class.
+ *
+ * @since 1.0
+ */
 final class AffiliateWP_Order_Details_For_Affiliates {
 
 	/** Singleton *************************************************************/
 
 	/**
-	 * @var AffiliateWP_Order_Details_For_Affiliates The one true AffiliateWP_Order_Details_For_Affiliates
+	 * Class instance.
+	 *
+	 * @var AffiliateWP_Order_Details_For_Affiliates
 	 * @since 1.0
 	 */
 	private static $instance;
 
-	public static  $plugin_dir;
-	public static  $plugin_url;
+	/**
+	 * Plugin directory.
+	 *
+	 * @var string
+	 * @since 1.0
+	 */
+	public static $plugin_dir;
+
+	/**
+	 * Plugin url.
+	 *
+	 * @var string
+	 * @since 1.0
+	 */
+	public static $plugin_url;
+
+	/**
+	 * Plugin version.
+	 *
+	 * @var string
+	 * @since 1.0
+	 */
 	private static $version;
 
 	/**
 	 * Order Details instance.
 	 *
-	 * @access public
-	 * @var    \AffiliateWP_Order_Details_For_Affiliates_Order_Details
+	 * @var \AffiliateWP_Order_Details_For_Affiliates_Order_Details
 	 */
 	public $order_details;
 
 	/**
 	 * Emails instance.
 	 *
-	 * @access public
-	 * @var    \AffiliateWP_Order_Details_For_Affiliates_Emails
+	 * @var \AffiliateWP_Order_Details_For_Affiliates_Emails
 	 */
 	public $emails;
 
 	/**
 	 * Shortcodes instance.
 	 *
-	 * @access public
-	 * @var    \AffiliateWP_Order_Details_For_Affiliates_Shortcodes
+	 * @var \AffiliateWP_Order_Details_For_Affiliates_Shortcodes
 	 */
 	public $shortcodes;
 
 	/**
-	 * Main AffiliateWP_Order_Details_For_Affiliates Instance
+	 * Main AffiliateWP_Order_Details_For_Affiliates Instance.
 	 *
 	 * Insures that only one instance of AffiliateWP_Order_Details_For_Affiliates exists in memory at any one
 	 * time. Also prevents needing to define globals all over the place.
 	 *
 	 * @since 1.0
-	 * @static
-	 * @staticvar array $instance
-	 * @return The one true AffiliateWP_Order_Details_For_Affiliates
+	 *
+	 * @return AffiliateWP_Order_Details_For_Affiliates The one true AffiliateWP_Order_Details_For_Affiliates.
 	 */
 	public static function instance() {
 		if ( ! isset( self::$instance ) && ! ( self::$instance instanceof AffiliateWP_Order_Details_For_Affiliates ) ) {
@@ -98,37 +122,40 @@ final class AffiliateWP_Order_Details_For_Affiliates {
 	}
 
 	/**
-	 * Throw error on object clone
+	 * Throw error on object clone.
 	 *
 	 * The whole idea of the singleton design pattern is that there is a single
 	 * object therefore, we don't want the object to be cloned.
 	 *
 	 * @since 1.0
 	 * @access protected
+	 *
 	 * @return void
 	 */
 	public function __clone() {
-		// Cloning instances of the class is forbidden
-		_doing_it_wrong( __FUNCTION__, __( 'Cheatin&#8217; huh?', 'affiliatewp-order-details-for-affiliates' ), '1.0' );
+		// Cloning instances of the class is forbidden.
+		_doing_it_wrong( __FUNCTION__, esc_html__( 'Cheatin&#8217; huh?', 'affiliatewp-order-details-for-affiliates' ), '1.0' );
 	}
 
 	/**
-	 * Disable unserializing of the class
+	 * Disable unserializing of the class.
 	 *
 	 * @since 1.0
 	 * @access protected
+	 *
 	 * @return void
 	 */
 	public function __wakeup() {
-		// Unserializing instances of the class is forbidden
-		_doing_it_wrong( __FUNCTION__, __( 'Cheatin&#8217; huh?', 'affiliatewp-order-details-for-affiliates' ), '1.0' );
+		// Unserializing instances of the class is forbidden.
+		_doing_it_wrong( __FUNCTION__, esc_html__( 'Cheatin&#8217; huh?', 'affiliatewp-order-details-for-affiliates' ), '1.0' );
 	}
 
 	/**
-	 * Include necessary files
+	 * Include necessary files.
 	 *
 	 * @access      private
 	 * @since       1.0.0
+	 *
 	 * @return      void
 	 */
 	private function includes() {
@@ -142,26 +169,26 @@ final class AffiliateWP_Order_Details_For_Affiliates {
 	}
 
 	/**
-	 * Setup the default hooks and actions
+	 * Sets up the default hooks and actions.
 	 *
 	 * @since 1.0
 	 *
 	 * @return void
 	 */
 	private function hooks() {
-		// add customers tab
+		// Add customers tab.
 		add_action( 'affwp_affiliate_dashboard_tabs', array( $this, 'add_order_details_tab' ), 10, 2 );
 
-		// prevent access to the customers tab
+		// Prevent access to the customers tab.
 		add_action( 'template_redirect', array( $this, 'no_access' ) );
 
-		// prevent access to the customers tab
+		// Prevent access to the customers tab.
 		add_action( 'wp_head', array( $this, 'styles' ) );
 
-		// plugin meta
+		// Plugin meta.
 		add_filter( 'plugin_row_meta', array( $this, 'plugin_meta' ), null, 2 );
 
-		// Add template folder to hold the customer table
+		// Add template folder to hold the customer table.
 		add_filter( 'affwp_template_paths', array( $this, 'get_theme_template_paths' ) );
 
 		// Add to the tabs list for 1.8.1 (fails silently if the hook doesn't exist).
@@ -170,7 +197,7 @@ final class AffiliateWP_Order_Details_For_Affiliates {
 	}
 
 	/**
-	 * Redirect affiliate to main dashboard page if they cannot access order details tab
+	 * Redirects affiliate to main dashboard page if they cannot access order details tab.
 	 *
 	 * @since 1.0
 	 *
@@ -178,19 +205,20 @@ final class AffiliateWP_Order_Details_For_Affiliates {
 	 */
 	public function no_access() {
 		if ( $this->is_order_details_tab() && ! ( $this->can_access_order_details() || $this->global_order_details_access() ) ) {
-			wp_redirect( affiliate_wp()->login->get_login_url() ); exit;
+			wp_redirect( affiliate_wp()->login->get_login_url() );
+			exit;
 		}
 	}
 
 	/**
-	 * Whether or not we're on the customer's tab of the dashboard
+	 * Determines whether or not we're on the customer's tab of the dashboard.
 	 *
 	 * @since 1.0
 	 *
 	 * @return boolean
 	 */
 	public function is_order_details_tab() {
-		if ( isset( $_GET['tab']) && 'order-details' == $_GET['tab'] ) {
+		if ( isset( $_GET['tab'] ) && 'order-details' == $_GET['tab'] ) {
 			return (bool) true;
 		}
 
@@ -198,7 +226,11 @@ final class AffiliateWP_Order_Details_For_Affiliates {
 	}
 
 	/**
-	 * Styles
+	 * Styles.
+	 *
+	 * @since 1.0
+	 *
+	 * @return void
 	 */
 	public function styles() {
 		?>
@@ -208,21 +240,22 @@ final class AffiliateWP_Order_Details_For_Affiliates {
 
 	/**
 	 * Register the "Order Details" tab.
-	 * 
+	 *
 	 * @since  AffiliateWP 1.8.1
 	 * @since  AffiliateWP 2.1.7 The tab being registered requires both a slug and title.
-	 * 
-	 * @return array $tabs The list of tabs
+	 *
+	 * @param array $tabs Array of tabs.
+	 * @return array $tabs Array of tabs.
 	 */
 	public function register_tab( $tabs ) {
-		
+
 		/**
 		 * User is on older version of AffiliateWP, use the older method of
-		 * registering the tab. 
-		 * 
+		 * registering the tab.
+		 *
 		 * The previous method was to register the slug, and add the tab
-		 * separately, @see add_tab()
-		 * 
+		 * separately, @see add_tab().
+		 *
 		 * @since 1.1.5
 		 */
 		if ( ! $this->has_2_1_7() ) {
@@ -232,7 +265,7 @@ final class AffiliateWP_Order_Details_For_Affiliates {
 		/**
 		 * Don't show tab to affiliate if they don't have access.
 		 * Also makes sure tab is properly outputted in Affiliate Area Tabs.
-		 * 
+		 *
 		 * @since 1.1.5
 		 */
 		if ( ! ( $this->can_access_order_details() || $this->global_order_details_access() ) ) {
@@ -241,16 +274,18 @@ final class AffiliateWP_Order_Details_For_Affiliates {
 
 		// Register the "Order Details" tab.
 		$tabs['order-details'] = __( 'Order Details', 'affiliatewp-order-details-for-affiliates' );
-		
+
 		// Return the tabs.
 		return $tabs;
 	}
 
 	/**
-	 * Add order details tab
+	 * Add order details tab.
 	 *
 	 * @since 1.0
 	 *
+	 * @param int    $affiliate_id ID of the current affiliate.
+	 * @param string $active_tab   Slug of the active tab.
 	 * @return void
 	 */
 	public function add_order_details_tab( $affiliate_id, $active_tab ) {
@@ -265,17 +300,17 @@ final class AffiliateWP_Order_Details_For_Affiliates {
 		}
 
 		?>
-		<li class="affwp-affiliate-dashboard-tab<?php echo $active_tab == 'order-details' ? ' active' : ''; ?>">
-			<a href="<?php echo esc_url( add_query_arg( 'tab', 'order-details' ) ); ?>"><?php _e( 'Order Details', 'affiliatewp-order-details-for-affiliates' ); ?></a>
+		<li class="affwp-affiliate-dashboard-tab<?php echo 'order-details' === $active_tab ? ' active' : ''; ?>">
+			<a href="<?php echo esc_url( add_query_arg( 'tab', 'order-details' ) ); ?>"><?php esc_html_e( 'Order Details', 'affiliatewp-order-details-for-affiliates' ); ?></a>
 		</li>
-	<?php
+		<?php
 	}
 
 	/**
 	 * Determine if the user has at least version 2.1.7 of AffiliateWP.
 	 *
 	 * @since 1.1.5
-	 * 
+	 *
 	 * @return boolean True if AffiliateWP v2.1.7 or newer, false otherwise.
 	 */
 	public function has_2_1_7() {
@@ -290,11 +325,12 @@ final class AffiliateWP_Order_Details_For_Affiliates {
 	}
 
 	/**
-	 * Add template folder to hold the customer table
+	 * Adds the template folder to hold the customer table.
 	 *
 	 * @since 1.0
 	 *
-	 * @return void
+	 * @param array $file_paths Template file paths.
+	 * @return array Template file paths.
 	 */
 	public function get_theme_template_paths( $file_paths ) {
 		$file_paths[80] = plugin_dir_path( __FILE__ ) . '/templates';
@@ -303,7 +339,7 @@ final class AffiliateWP_Order_Details_For_Affiliates {
 	}
 
 	/**
-	 * Determins if the given user can access the purchase details?
+	 * Determines if the given user can access the purchase details.
 	 *
 	 * @access public
 	 * @since  1.0
@@ -313,14 +349,14 @@ final class AffiliateWP_Order_Details_For_Affiliates {
 	 */
 	public function can_access_order_details( $user_id = 0 ) {
 
-		// use user ID passed in, else get current user ID
+		// Use user ID passed in, else get current user ID.
 		$user_id = $user_id ? $user_id : get_current_user_id();
 
 		if ( ! $user_id ) {
 			return false;
 		}
 
-		// look up meta
+		// Look up meta.
 		$can_receive = get_user_meta( $user_id, 'affwp_order_details_access', true );
 
 		if ( $can_receive ) {
@@ -349,24 +385,25 @@ final class AffiliateWP_Order_Details_For_Affiliates {
 	}
 
 	/**
-	 * Modify plugin metalinks
+	 * Modifies the plugin metalinks.
 	 *
-	 * @access      public
-	 * @since       1.0.0
-	 * @param       array $links The current links array
-	 * @param       string $file A specific plugin table entry
-	 * @return      array $links The modified links array
+	 * @access public
+	 * @since 1.0.0
+	 *
+	 * @param array  $links The current links array.
+	 * @param string $file A specific plugin table entry.
+	 * @return array $links The modified links array.
 	 */
 	public function plugin_meta( $links, $file ) {
-	    if ( $file == plugin_basename( __FILE__ ) ) {
-	        $plugins_link = array(
-	            '<a title="' . __( 'Get more add-ons for AffiliateWP', 'affiliatewp-order-details-for-affiliates' ) . '" href="http://affiliatewp.com/addons/" target="_blank">' . __( 'Get add-ons', 'affiliatewp-order-details-for-affiliates' ) . '</a>'
-	        );
+		if ( plugin_basename( __FILE__ ) === $file ) {
+			$plugins_link = array(
+				'<a title="' . __( 'Get more add-ons for AffiliateWP', 'affiliatewp-order-details-for-affiliates' ) . '" href="http://affiliatewp.com/addons/" target="_blank">' . __( 'Get add-ons', 'affiliatewp-order-details-for-affiliates' ) . '</a>',
+			);
 
-	        $links = array_merge( $links, $plugins_link );
-	    }
+			$links = array_merge( $links, $plugins_link );
+		}
 
-	    return $links;
+		return $links;
 	}
 
 	/**
@@ -399,18 +436,19 @@ final class AffiliateWP_Order_Details_For_Affiliates {
  * Example: <?php $affiliatewp_order_details_for_affiliates = affiliatewp_order_details_for_affiliates(); ?>
  *
  * @since 1.0
- * @return \AffiliateWP_Order_Details_For_Affiliates The one true AffiliateWP_Order_Details_For_Affiliates Instance
+ *
+ * @return \AffiliateWP_Order_Details_For_Affiliates The one true AffiliateWP_Order_Details_For_Affiliates Instance.
  */
 function affiliatewp_order_details_for_affiliates() {
-    if ( ! class_exists( 'Affiliate_WP' ) ) {
-        if ( ! class_exists( 'AffiliateWP_Activation' ) ) {
-            require_once 'includes/class-activation.php';
-        }
+	if ( ! class_exists( 'Affiliate_WP' ) ) {
+		if ( ! class_exists( 'AffiliateWP_Activation' ) ) {
+			require_once 'includes/class-activation.php';
+		}
 
-        $activation = new AffiliateWP_Activation( plugin_dir_path( __FILE__ ), basename( __FILE__ ) );
-        $activation = $activation->run();
-    } else {
-        return AffiliateWP_Order_Details_For_Affiliates::instance();
-    }
+		$activation = new AffiliateWP_Activation( plugin_dir_path( __FILE__ ), basename( __FILE__ ) );
+		$activation = $activation->run();
+	} else {
+		return AffiliateWP_Order_Details_For_Affiliates::instance();
+	}
 }
 add_action( 'plugins_loaded', 'affiliatewp_order_details_for_affiliates', 100 );
