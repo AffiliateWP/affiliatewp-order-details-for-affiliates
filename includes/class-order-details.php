@@ -46,6 +46,14 @@ class AffiliateWP_Order_Details_For_Affiliates_Order_Details {
 		global $affwp_od_atts;
 
 		// Set up defaults.
+		/**
+		 * Filters the arguments passed to get_referrals() to populate the order details table.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array $args         Arguments passed to get_referrals().
+		 * @param int   $affiliate_id Affiliate ID.
+		 */
 		$args = apply_filters(
 			'affwp_odfa_referral_args',
 			array(

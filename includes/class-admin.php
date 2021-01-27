@@ -128,4 +128,4 @@ class AffiliateWP_Order_Details_For_Affiliates_Admin {
 	}
 
 }
-$affiliatewp_menu = new AffiliateWP_Order_Details_For_Affiliates_Admin();
+$affiliatewp_menu = new AffiliateWP_Order_Details_For_Affiliates_Admin;

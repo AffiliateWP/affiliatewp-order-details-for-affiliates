@@ -100,11 +100,11 @@ final class AffiliateWP_Order_Details_For_Affiliates {
 	 *
 	 * @since 1.0
 	 *
-	 * @return The one true AffiliateWP_Order_Details_For_Affiliates.
+	 * @return AffiliateWP_Order_Details_For_Affiliates The one true AffiliateWP_Order_Details_For_Affiliates.
 	 */
 	public static function instance() {
 		if ( ! isset( self::$instance ) && ! ( self::$instance instanceof AffiliateWP_Order_Details_For_Affiliates ) ) {
-			self::$instance = new AffiliateWP_Order_Details_For_Affiliates();
+			self::$instance = new AffiliateWP_Order_Details_For_Affiliates;
 
 			self::$plugin_dir = plugin_dir_path( __FILE__ );
 			self::$plugin_url = plugin_dir_url( __FILE__ );
@@ -113,9 +113,9 @@ final class AffiliateWP_Order_Details_For_Affiliates {
 			self::$instance->includes();
 			self::$instance->hooks();
 
-			self::$instance->order_details = new AffiliateWP_Order_Details_For_Affiliates_Order_Details();
-			self::$instance->emails        = new AffiliateWP_Order_Details_For_Affiliates_Emails();
-			self::$instance->shortcodes    = new AffiliateWP_Order_Details_For_Affiliates_Shortcodes();
+			self::$instance->order_details = new AffiliateWP_Order_Details_For_Affiliates_Order_Details;
+			self::$instance->emails        = new AffiliateWP_Order_Details_For_Affiliates_Emails;
+			self::$instance->shortcodes    = new AffiliateWP_Order_Details_For_Affiliates_Shortcodes;
 		}
 
 		return self::$instance;
@@ -169,7 +169,7 @@ final class AffiliateWP_Order_Details_For_Affiliates {
 	}
 
 	/**
-	 * Setup the default hooks and actions.
+	 * Sets up the default hooks and actions.
 	 *
 	 * @since 1.0
 	 *
@@ -197,7 +197,7 @@ final class AffiliateWP_Order_Details_For_Affiliates {
 	}
 
 	/**
-	 * Redirect affiliate to main dashboard page if they cannot access order details tab.
+	 * Redirects affiliate to main dashboard page if they cannot access order details tab.
 	 *
 	 * @since 1.0
 	 *
@@ -211,7 +211,7 @@ final class AffiliateWP_Order_Details_For_Affiliates {
 	}
 
 	/**
-	 * Whether or not we're on the customer's tab of the dashboard.
+	 * Determines whether or not we're on the customer's tab of the dashboard.
 	 *
 	 * @since 1.0
 	 *
@@ -325,7 +325,7 @@ final class AffiliateWP_Order_Details_For_Affiliates {
 	}
 
 	/**
-	 * Add template folder to hold the customer table.
+	 * Adds the template folder to hold the customer table.
 	 *
 	 * @since 1.0
 	 *
@@ -339,7 +339,7 @@ final class AffiliateWP_Order_Details_For_Affiliates {
 	}
 
 	/**
-	 * Determins if the given user can access the purchase details.
+	 * Determines if the given user can access the purchase details.
 	 *
 	 * @access public
 	 * @since  1.0
@@ -385,7 +385,7 @@ final class AffiliateWP_Order_Details_For_Affiliates {
 	}
 
 	/**
-	 * Modify plugin metalinks.
+	 * Modifies the plugin metalinks.
 	 *
 	 * @access public
 	 * @since 1.0.0
