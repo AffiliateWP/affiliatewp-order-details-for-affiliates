@@ -446,15 +446,5 @@ final class AffiliateWP_Order_Details_For_Affiliates {
  * @return \AffiliateWP_Order_Details_For_Affiliates The one true AffiliateWP_Order_Details_For_Affiliates Instance.
  */
 function affiliatewp_order_details_for_affiliates() {
-	if ( ! class_exists( 'Affiliate_WP' ) ) {
-		if ( ! class_exists( 'AffiliateWP_Activation' ) ) {
-			require_once 'includes/class-activation.php';
-		}
-
-		$activation = new AffiliateWP_Activation( plugin_dir_path( __FILE__ ), basename( __FILE__ ) );
-		$activation = $activation->run();
-	} else {
-		return AffiliateWP_Order_Details_For_Affiliates::instance();
-	}
+	return AffiliateWP_Order_Details_For_Affiliates::instance();
 }
-add_action( 'plugins_loaded', 'affiliatewp_order_details_for_affiliates', 100 );
