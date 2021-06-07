@@ -84,10 +84,9 @@ final class AffiliateWP_Order_Details_For_Affiliates {
 			self::$instance = new AffiliateWP_Order_Details_For_Affiliates;
 			self::$instance->file = $file;
 
-			self::$plugin_dir = plugin_dir_path( __FILE__ );
-			self::$plugin_url = plugin_dir_url( __FILE__ );
 			self::$version    = '1.1.6';
 
+			self::$instance->setup_constants();
 			self::$instance->includes();
 			self::$instance->hooks();
 
@@ -129,6 +128,35 @@ final class AffiliateWP_Order_Details_For_Affiliates {
 	}
 
 	/**
+	 * Sets up plugin constants.
+	 *
+	 * @since 1.2
+	 *
+	 * @return void
+	 */
+	private function setup_constants() {
+		// Plugin version.
+		if ( ! defined( 'AFFWP_ODFA_VERSION' ) ) {
+			define( 'AFFWP_ODFA_VERSION', $this->version );
+		}
+
+		// Plugin Folder Path.
+		if ( ! defined( 'AFFWP_ODFA_PLUGIN_DIR' ) ) {
+			define( 'AFFWP_ODFA_PLUGIN_DIR', plugin_dir_path( $this->file ) );
+		}
+
+		// Plugin Folder URL.
+		if ( ! defined( 'AFFWP_ODFA_PLUGIN_URL' ) ) {
+			define( 'AFFWP_ODFA_PLUGIN_URL', plugin_dir_url( $this->file ) );
+		}
+
+		// Plugin Root File.
+		if ( ! defined( 'AFFWP_ODFA_PLUGIN_FILE' ) ) {
+			define( 'AFFWP_ODFA_PLUGIN_FILE', $this->file );
+		}
+	}
+
+	/**
 	 * Include necessary files.
 	 *
 	 * @access      private
@@ -137,12 +165,12 @@ final class AffiliateWP_Order_Details_For_Affiliates {
 	 * @return      void
 	 */
 	private function includes() {
-		require_once self::$plugin_dir . 'includes/class-order-details.php';
-		require_once self::$plugin_dir . 'includes/class-emails.php';
-		require_once self::$plugin_dir . 'includes/class-shortcodes.php';
+		require_once AFFWP_ODFA_PLUGIN_DIR . 'includes/class-order-details.php';
+		require_once AFFWP_ODFA_PLUGIN_DIR . 'includes/class-emails.php';
+		require_once AFFWP_ODFA_PLUGIN_DIR . 'includes/class-shortcodes.php';
 
 		if ( is_admin() ) {
-			require_once self::$plugin_dir . 'includes/class-admin.php';
+			require_once AFFWP_ODFA_PLUGIN_DIR . 'includes/class-admin.php';
 		}
 	}
 
@@ -311,7 +339,7 @@ final class AffiliateWP_Order_Details_For_Affiliates {
 	 * @return array Template file paths.
 	 */
 	public function get_theme_template_paths( $file_paths ) {
-		$file_paths[80] = plugin_dir_path( __FILE__ ) . '/templates';
+		$file_paths[80] = AFFWP_ODFA_PLUGIN_DIR . '/templates';
 
 		return $file_paths;
 	}
