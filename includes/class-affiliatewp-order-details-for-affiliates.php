@@ -32,28 +32,20 @@ final class AffiliateWP_Order_Details_For_Affiliates {
 	private static $instance;
 
 	/**
-	 * Plugin directory.
-	 *
-	 * @var string
-	 * @since 1.0
-	 */
-	public static $plugin_dir;
-
-	/**
-	 * Plugin url.
-	 *
-	 * @var string
-	 * @since 1.0
-	 */
-	public static $plugin_url;
-
-	/**
 	 * Plugin version.
 	 *
 	 * @var string
 	 * @since 1.0
 	 */
 	private static $version;
+
+	/**
+	 * Main plugin file.
+	 *
+	 * @since 1.2
+	 * @var   string
+	 */
+	public $file;
 
 	/**
 	 * Order Details instance.
@@ -84,11 +76,13 @@ final class AffiliateWP_Order_Details_For_Affiliates {
 	 *
 	 * @since 1.0
 	 *
+	 * @param string $file Main plugin file.
 	 * @return AffiliateWP_Order_Details_For_Affiliates The one true AffiliateWP_Order_Details_For_Affiliates.
 	 */
-	public static function instance() {
+	public static function instance( $file = '' ) {
 		if ( ! isset( self::$instance ) && ! ( self::$instance instanceof AffiliateWP_Order_Details_For_Affiliates ) ) {
 			self::$instance = new AffiliateWP_Order_Details_For_Affiliates;
+			self::$instance->file = $file;
 
 			self::$plugin_dir = plugin_dir_path( __FILE__ );
 			self::$plugin_url = plugin_dir_url( __FILE__ );
