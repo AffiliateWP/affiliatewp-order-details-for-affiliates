@@ -37,7 +37,7 @@ final class AffiliateWP_Order_Details_For_Affiliates {
 	 * @var string
 	 * @since 1.0
 	 */
-	private static $version;
+	private $version = '1.1.6';
 
 	/**
 	 * Main plugin file.
@@ -83,8 +83,6 @@ final class AffiliateWP_Order_Details_For_Affiliates {
 		if ( ! isset( self::$instance ) && ! ( self::$instance instanceof AffiliateWP_Order_Details_For_Affiliates ) ) {
 			self::$instance = new AffiliateWP_Order_Details_For_Affiliates;
 			self::$instance->file = $file;
-
-			self::$version    = '1.1.6';
 
 			self::$instance->setup_constants();
 			self::$instance->includes();
