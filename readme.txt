@@ -66,6 +66,12 @@ Note: When there is global access, the checkbox on the edit affiliate screen is 
 
 == Changelog ==
 
+= 1.2 =
+* New: Enforce minimum dependency requirements checking
+* New: Requires PHP 5.6 minimum
+* New: Requires WordPress 5.0 minimum
+* New: Requires AffiliateWP 2.6 minimum
+
 = 1.1.6 =
 * New: Add Polish translations
 * Improved: Allow language translations to be handled by WP repo
