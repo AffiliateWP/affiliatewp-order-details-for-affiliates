@@ -37,7 +37,7 @@ final class AffiliateWP_Order_Details_For_Affiliates {
 	 * @var string
 	 * @since 1.0
 	 */
-	private $version = '1.1.6';
+	private $version = '1.2';
 
 	/**
 	 * Main plugin file.
