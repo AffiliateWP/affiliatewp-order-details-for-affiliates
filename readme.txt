@@ -12,7 +12,7 @@ Allow affiliates to see order details on referrals they generated.
 
 == Description ==
 
-> This plugin requires [AffiliateWP](https://affiliatewp.com/ "AffiliateWP") <strong>It will NOT function without it.</strong>
+> This plugin requires [AffiliateWP](https://affiliatewp.com/ "AffiliateWP") 2.6+. <strong>It will NOT function without it.</strong>
 
 This add-on adds a new area to the affiliate’s dashboard that allows a logged-in affiliate to see specific information about the order that their referral generated. Currently it works with both Easy Digital Downloads and WooCommerce.
 
