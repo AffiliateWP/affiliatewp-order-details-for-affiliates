@@ -1,10 +1,10 @@
 === AffiliateWP - Order Details For Affiliates ===
 Contributors: sumobi, mordauk, drewapicture
 Tags: AffiliateWP, affiliate, Pippin Williamson, Andrew Munro, mordauk, pippinsplugins, sumobi, ecommerce, e-commerce, e commerce, selling, membership, referrals, marketing
-Requires at least: 4.6
+Requires at least: 5.0
 Tested up to: 5.7
-Requires PHP: 5.3
-Stable tag: 1.1.6
+Requires PHP: 5.6
+Stable tag: 1.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -12,7 +12,7 @@ Allow affiliates to see order details on referrals they generated.
 
 == Description ==
 
-> This plugin requires [AffiliateWP](https://affiliatewp.com/ "AffiliateWP") <strong>It will NOT function without it.</strong>
+> This plugin requires [AffiliateWP](https://affiliatewp.com/ "AffiliateWP") 2.6+. <strong>It will NOT function without it.</strong>
 
 This add-on adds a new area to the affiliate’s dashboard that allows a logged-in affiliate to see specific information about the order that their referral generated. Currently it works with both Easy Digital Downloads and WooCommerce.
 
@@ -65,6 +65,12 @@ Note: When there is global access, the checkbox on the edit affiliate screen is 
 == Screenshots ==
 
 == Changelog ==
+
+= 1.2 =
+* New: Enforce minimum dependency requirements checking
+* New: Requires PHP 5.6 minimum
+* New: Requires WordPress 5.0 minimum
+* New: Requires AffiliateWP 2.6 minimum
 
 = 1.1.6 =
 * New: Add Polish translations
